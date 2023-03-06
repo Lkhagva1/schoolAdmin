@@ -8,7 +8,6 @@ export const UserStore = (props) => {
   const [refreshToken, setRefreshToken] = useState("");
   const [username, setUsername] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState(false);
 
   const loginSuccess = (accToken, refToken, name) => {
     Cookies.set("accessToken", accToken);
@@ -18,8 +17,8 @@ export const UserStore = (props) => {
     setAccessToken(accToken);
     setRefreshToken(refToken);
     setUsername(name);
-    setUser(true);
   };
+
   return (
     <UserContext.Provider
       value={{
@@ -33,6 +32,7 @@ export const UserStore = (props) => {
         setUsername,
         isLoading,
         setIsLoading,
+        loginSuccess,
       }}
     >
       {props.children}

@@ -1,5 +1,5 @@
 import axios from "../axios";
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import UserContext from "../context/UserContext";
 import Cookies from "js-cookie";
 import { useToast } from "@chakra-ui/react";
@@ -11,7 +11,7 @@ export const UseAuth = (props) => {
   const history = useHistory();
   const toast = useToast();
   const id = "toast";
-
+  const [user, setUser] = useState(false);
   const loginHandler = async (user, pass) => {
     console.log("login", user, pass);
     setIsLoading(true);
@@ -22,6 +22,7 @@ export const UseAuth = (props) => {
       })
       .then((result) => {
         console.log("login result -->", result.data);
+
         loginSuccess(
           result.data.accessToken,
           result.data.refreshToken,
@@ -48,24 +49,28 @@ export const UseAuth = (props) => {
   };
 
   const logoutHandler = async () => {
-    const refToken = Cookies.get("refreshToken");
-    setIsLoading(true);
-    try {
-      axios
-        .post("", { TheRefreshToken: refToken })
-        .then((result) => {
-          Cookies.remove("accessToken");
-          Cookies.remove("refreshToken");
-          Cookies.remove("isLoggedIn");
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setIsLoading(false);
-        });
-    } catch (e) {
-      // console.log(e);
-    }
+    // const refToken = Cookies.get("refreshToken");
+    // setIsLoading(false);
+    setUser(false);
   };
+  // try {
+  //   axios
+  //     .post("", { TheRefreshToken: refToken })
+  //     .then((result) => {
+  //       Cookies.remove("username");
+  //       Cookies.remove("accessToken");
+  //       Cookies.remove("refreshToken");
+  //       Cookies.remove("user");
+  //       setUser(false);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       setIsLoading(false);
+  //     });
+  // } catch (e) {
+  // console.log(e);
+  //   }
+  // };
 
   return (
     <AuthContext.Provider

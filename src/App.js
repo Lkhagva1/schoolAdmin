@@ -10,18 +10,22 @@ import Main from "./pages/Main";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Login from "./pages/Auth/Login";
+import { useContext } from "react";
+import UserContext from "./context/UserContext";
+import AuthContext from "./hooks/UseAuth";
 function App() {
   const accessToken = Cookies.get("accessToken");
   const isLog = Cookies.get("isLoggedIn");
+  const user = useContext(AuthContext);
   return (
     <Router>
-      {isLog && accessToken ? (
+      {user ? (
         <Main>
           <Switch>
             <Route exact path="/dashboard">
               <Dashboard />
             </Route>
-            <Route path="/dashboard/test">
+            <Route path="/branch">
               <Dashboard />
             </Route>
             <Redirect to="/dashboard" />
