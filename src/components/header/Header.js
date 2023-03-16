@@ -39,7 +39,6 @@ const Header = ({ onOpen, ...rest }) => {
       ml={{ base: 0, md: 60 }}
       px={{ base: 4, md: 4 }}
       height="14"
-      pos={"fixed"}
       w={{ base: "full", md: "85%", lg: "85%" }}
       alignItems="center"
       bg={useColorModeValue("white", "gray.900")}
@@ -66,7 +65,7 @@ const Header = ({ onOpen, ...rest }) => {
         >
           <Stack spacing={5} mr="50px">
             <InputGroup bg="white" borderRadius="5px" color="black">
-              <Input placeholder="Search.." fontSize="10px" />
+              <Input placeholder="хайх.." fontSize="10px" />
               <IconButton
                 display={{ base: "flex", md: "flex" }}
                 variant="outline"
@@ -117,8 +116,8 @@ const Header = ({ onOpen, ...rest }) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">admin</Text>
-                  <Text fontSize="xs" color="gray.600">
+                  <Text fontSize="sm">Нэр</Text>
+                  <Text fontSize="xs" color="#45a735">
                     Admin
                   </Text>
                 </VStack>
@@ -131,11 +130,11 @@ const Header = ({ onOpen, ...rest }) => {
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
+              <MenuItem>Профайл</MenuItem>
+              <MenuItem>Тохиргоо</MenuItem>
+              <MenuItem>Данс</MenuItem>
               <MenuDivider />
-              <MenuItem onClick={logoutHandler}>Sign out</MenuItem>
+              <MenuItem onClick={logoutHandler}>Гарах</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

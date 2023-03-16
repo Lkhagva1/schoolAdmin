@@ -14,17 +14,17 @@ import {
 export const navData = [
   {
     title: "Хянах самбар",
-    toLink: "/",
+    toLink: "dashboard",
     icon: FiGrid,
   },
   {
     title: "Сурагч",
-    toLink: "/Students",
+    toLink: "/students",
     icon: BiFace,
     subTitle: [
       {
         title: "Бүх сурагч",
-        toLink: "/students/all",
+        toLink: "/students",
         icon: BiFace,
       },
       {
@@ -41,7 +41,7 @@ export const navData = [
     subTitle: [
       {
         title: "Бүх багш",
-        toLink: "/teachers/all",
+        toLink: "/teachers",
         icon: FiUsers,
       },
       {

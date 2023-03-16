@@ -25,7 +25,7 @@ const StatCard = ({ data }) => {
         )}
         w="100%"
         textAlign="left"
-        align="start"
+        align="center"
         spacing={0}
         role="group"
         overflow="hidden"

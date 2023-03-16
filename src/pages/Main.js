@@ -13,10 +13,14 @@ import SideBar from "../components/sidebar/SideBar";
 const Main = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box
+      as="section"
+      minH="100vh"
+      bg={useColorModeValue("gray.50", "gray.900")}
+    >
       <SideBar
         onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
+        display={{ base: "none", md: "unset" }}
       />
       <Drawer
         autoFocus={false}

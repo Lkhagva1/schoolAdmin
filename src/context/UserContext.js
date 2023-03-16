@@ -4,17 +4,17 @@ const UserContext = createContext();
 
 export const UserStore = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [accessToken, setAccessToken] = useState("");
+  const [token, setToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [username, setUsername] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const loginSuccess = (accToken, refToken, name) => {
-    Cookies.set("accessToken", accToken);
+  const loginSuccess = (Token, refToken, name) => {
+    Cookies.set("token", Token);
     Cookies.set("refreshToken", refToken);
     Cookies.set("username", name);
     Cookies.set("user", true);
-    setAccessToken(accToken);
+    setToken(Token);
     setRefreshToken(refToken);
     setUsername(name);
   };
@@ -24,8 +24,8 @@ export const UserStore = (props) => {
       value={{
         isLoggedIn,
         setIsLoggedIn,
-        accessToken,
-        setAccessToken,
+        token,
+        setToken,
         refreshToken,
         setRefreshToken,
         username,

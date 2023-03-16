@@ -22,7 +22,6 @@ export const UseAuth = (props) => {
       })
       .then((result) => {
         console.log("login result -->", result.data);
-
         loginSuccess(
           result.data.accessToken,
           result.data.refreshToken,
@@ -33,24 +32,25 @@ export const UseAuth = (props) => {
       .catch((err) => {
         console.log("login err -->", err.response);
         setIsLoading(false);
-        // if (!toast.isActive(id)) {
-        //   toast({
-        //     id,
-        //     duration: 2000,
-        //     position: "top",
-        //     status: "error",
-        //     description:
-        //       err.response.status === 400
-        //         ? "Таны нэвтрэх нэр эсвэл нууц үг буруу байна!"
-        //         : "Холболтын алдаа",
-        //   });
-        // }
+        if (!toast.isActive(id)) {
+          toast({
+            id,
+            duration: 2000,
+            position: "top",
+            status: "error",
+            description:
+              err.response.status === 400
+                ? "Таны нэвтрэх нэр эсвэл нууц үг буруу байна!"
+                : "Холболтын алдаа",
+          });
+        }
       });
   };
 
   const logoutHandler = async () => {
     // const refToken = Cookies.get("refreshToken");
     // setIsLoading(false);
+    Cookies.remove("token");
     setUser(false);
   };
   // try {
