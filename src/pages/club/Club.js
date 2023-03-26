@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Card,
+  CardHeader,
   Heading,
   HStack,
   Link,
   TableContainer,
   useToast,
+  VStack,
 } from "@chakra-ui/react";
 import {
   columnsData1,
@@ -33,63 +35,45 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useMemo } from "react";
-
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-
-import { FcGraduationCap } from "react-icons/fc";
 import { FiTrash2, FiEdit, FiUserPlus, FiEdit2 } from "react-icons/fi";
-
+import { FcGraduationCap } from "react-icons/fc";
 import axios from "axios";
-
-const Teacher = () => {
+const Club = () => {
   const toast = useToast();
   const id = "test";
-  const [teacherList, setTeacherList] = useState([]);
+  const [Clublist, setClublist] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getAllFac", {})
+      .get("http://localhost:5000/allissue", {})
       .then((res) => {
-        // console.log("branch ---", res.data.data);
-        setTeacherList(res.data);
+        console.log("branch ---", res.data);
+        setClublist(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  const deleteHandler = (id) => {
-    console.log("DElETE data ---", id);
-    axios
-      .delete("http://localhost:5000/getAllFac/", {
-        data: {
-          _id: id,
-        },
-      })
-      .then((result) => {
-        if (!toast.isActive(id)) {
-          toast({
-            id,
-            duration: 2000,
-            position: "top",
-            status: "success",
-            description: "Амжилттай устлаа!",
-          });
-        }
-      })
-      .catch((err) => {
-        // console.log(err);
-        if (!toast.isActive(id)) {
-          toast({
-            id,
-            duration: 2000,
-            position: "top",
-            status: "error",
-            description: err.response.data.message
-              ? err.response.data.message
-              : "Алдаа гарлаа!",
-          });
-        }
-      });
+  const AcceptReqhandle = async (id) => {
+    console.log(id);
+    try {
+      const res = await axios.post("http://localhost:5000/acjoinclub", { id });
+      const response = await axios.get("http://localhost:5000/allissue");
+      if (!toast.isActive(id)) {
+        toast({
+          id,
+          duration: 2000,
+          position: "top",
+          status: "success",
+          description: "Амжилттай!",
+        });
+      }
+      console.log("log");
+    } catch (error) {
+      console.log("err", error);
+    }
   };
+  const filterIssue = Clublist && Clublist.filter((item) => !item.isIssue);
   return (
     <Box ml="225px" mt={"30px"} bg={"white"} rounded="lg" boxShadow={"lg"}>
       <Card p="12px 5px" mb="12px" pl={"20px"}>
@@ -98,11 +82,11 @@ const Teacher = () => {
             <FcGraduationCap />
           </Text>
           <Text fontSize="15px" fontWeight="bold">
-            Бүх багш ажилчид
+            Бүх сурагчид
           </Text>
           <HStack>
             <Button colorScheme={"green"} alignItems="center" textAlign={"end"}>
-              <Link href="/teachers/add">
+              <Link href="/students/add">
                 <FiUserPlus />
               </Link>
             </Button>
@@ -111,17 +95,18 @@ const Teacher = () => {
       </Card>
       <Flex
         direction="column"
-        pt={{ base: "50px", md: "10px" }}
-        overflowX={{ sm: "scroll", lg: "scroll" }}
+        // pt={{ base: "50px", md: "10px" }}
+        w={{ sm: "50%", md: "100%", lg: "100%" }}
+        overflowX={{ sm: "scroll", lg: "hidden" }}
       >
         <Flex justify="space-between" align="center" w="100%">
           <Stack
             direction={{ sm: "column", md: "row" }}
-            spacing={{ sm: "4px" }}
+            spacing={{ sm: "4px", md: "12px" }}
             align="center"
             me="12px"
-            ml={"20px"}
             my="24px"
+            ml={"20px"}
             minW={{ sm: "100px", md: "200px" }}
           >
             <Select
@@ -155,63 +140,43 @@ const Teacher = () => {
         </Flex>
         <Flex p={6} direction="column">
           <Heading mb={4}></Heading>
-
           <TableContainer>
             <Table size="sm" variant="striped" alignItems="flex-end">
               <Thead>
                 <Tr>
-                  <Th w="5%">ID</Th>
-                  <Th w="10%">Зураг</Th>
-                  <Th w="10%">Овог</Th>
+                  <Th w="5%">Клубын нэр</Th>
                   <Th w="10%">Нэр</Th>
-                  <Th w="10%">цахим хаяг</Th>
-                  <Th w="10%">ажилтны Id</Th>
-                  <Th w="10%">нас</Th>
-                  <Th w="10%">хүйс</Th>
-                  <Th w="10%">төрсөн өдөр</Th>
-                  <Th w="10%">Хаяг</Th>
-                  <Th w="10%">Утас</Th>
-                  <Th w="10%">Зэрэг</Th>
-                  <Th w="10%">танхим</Th>
-                  <Th w="10%">элссэн он</Th>
+                  <Th w="10%">курс</Th>
+                  <Th w="10%">Roll No.</Th>
                   <Th w="10%">action</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                {teacherList.map((e, index) => (
-                  <Tr key={index}>
-                    <Td>1</Td>
-                    <Td></Td>
-                    <Td>{e.surname}</Td>
-                    <Td>{e.name}</Td>
-                    <Td>{e.email}</Td>
-                    <Td>{e.empolyee_id} </Td>
-                    <Td>{e.age}</Td>
-                    <Td>{e.gender}</Td>
-                    <Td>{e.date_of_birth}</Td>
-                    <Td>{e.address}</Td>
-                    <Td>{e.mobile}</Td>
-                    <Td>{e.qulification}</Td>
-                    <Td>{e.teaching_area}</Td>
-                    <Td>{e.joining_year}</Td>
-                    <Td>
-                      <Button
-                        bg={"transparent"}
-                        fontSize="13px"
-                        // onClick={() => DeleteHandle(e._id)}
-                      >
-                        <FiEdit2 />
-                      </Button>
-                      <Button
-                        bg={"transparent"}
-                        fontSize="13px"
-                        onClick={() => deleteHandler(e._id)}
-                      >
-                        <FiTrash2 />
-                      </Button>
-                    </Td>
-                  </Tr>
-                ))}
+                {filterIssue &&
+                  filterIssue.map((item, index) => (
+                    <Tr key={index}>
+                      <Td>{item.clubName}</Td>
+                      <Td>{item.stuDetail.name}</Td>
+                      <Td>{item.stuDetail.clsName}</Td>
+                      <Td>{item.stuDetail.Roll_No}</Td>
+                      <Td>
+                        <Button
+                          bg={"transparent"}
+                          fontSize="13px"
+                          onClick={() => AcceptReqhandle(item._id)}
+                        >
+                          <FiEdit2 />
+                        </Button>
+                        <Button
+                          bg={"transparent"}
+                          fontSize="13px"
+                          // onClick={() => DeleteHandle(e._id)}
+                        >
+                          <FiTrash2 />
+                        </Button>
+                      </Td>
+                    </Tr>
+                  ))}
               </Tbody>
             </Table>
           </TableContainer>
@@ -229,7 +194,9 @@ const Teacher = () => {
             color="#45a735"
             fontWeight="normal"
             mb={{ sm: "24px", md: "0px" }}
-          ></Text>
+          >
+            qw123456
+          </Text>
           <Stack direction="row" alignSelf="flex-end" spacing="4px" ms="auto">
             <Button
               variant="no-hover"
@@ -277,4 +244,4 @@ const Teacher = () => {
   );
 };
 
-export default Teacher;
+export default Club;

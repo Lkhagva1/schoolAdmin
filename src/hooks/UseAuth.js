@@ -1,37 +1,48 @@
-import axios from "../axios";
 import React, { createContext, useContext, useState } from "react";
-import UserContext from "../context/UserContext";
+
 import Cookies from "js-cookie";
 import { useToast } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import axios from "axios";
 const AuthContext = createContext();
 
 export const UseAuth = (props) => {
-  const { setIsLoading, loginSuccess } = useContext(UserContext);
   const history = useHistory();
   const toast = useToast();
   const id = "toast";
-  const [user, setUser] = useState(false);
-  const loginHandler = async (user, pass) => {
-    console.log("login", user, pass);
-    setIsLoading(true);
+  // const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // };
+
+  const loginHandler = async (email, password, type) => {
+    // console.log("login", user, password);
     axios
-      .post("api/login", {
-        username: user,
-        password: pass,
+      .post("http://localhost:5000/signin", {
+        email: email,
+        password: password,
       })
       .then((result) => {
         console.log("login result -->", result.data);
-        loginSuccess(
-          result.data.accessToken,
-          result.data.refreshToken,
-          result.data.username
+        Cookies.set("jwt", result.data.token);
+        Cookies.set("user", result.data.user.lastname);
+        Cookies.set("isLoggedIn", true);
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify(result.data.lastname)
         );
-        setIsLoading(false);
+        if (!toast.isActive(id)) {
+          toast({
+            id,
+            duration: 2000,
+            position: "top",
+            status: "success",
+            description: "амжилттай нэвтэрлээ!",
+          });
+        }
       })
-      .catch((err) => {
-        console.log("login err -->", err.response);
-        setIsLoading(false);
+      .catch((result) => {
+        console.log("login err -->", result.data);
         if (!toast.isActive(id)) {
           toast({
             id,
@@ -39,7 +50,7 @@ export const UseAuth = (props) => {
             position: "top",
             status: "error",
             description:
-              err.response.status === 400
+              result.response.status === 400
                 ? "Таны нэвтрэх нэр эсвэл нууц үг буруу байна!"
                 : "Холболтын алдаа",
           });
@@ -48,29 +59,10 @@ export const UseAuth = (props) => {
   };
 
   const logoutHandler = async () => {
-    // const refToken = Cookies.get("refreshToken");
-    // setIsLoading(false);
-    Cookies.remove("token");
-    setUser(false);
+    Cookies.remove("jwt");
+    Cookies.remove("user");
+    Cookies.remove("isLoggedIn");
   };
-  // try {
-  //   axios
-  //     .post("", { TheRefreshToken: refToken })
-  //     .then((result) => {
-  //       Cookies.remove("username");
-  //       Cookies.remove("accessToken");
-  //       Cookies.remove("refreshToken");
-  //       Cookies.remove("user");
-  //       setUser(false);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       setIsLoading(false);
-  //     });
-  // } catch (e) {
-  // console.log(e);
-  //   }
-  // };
 
   return (
     <AuthContext.Provider

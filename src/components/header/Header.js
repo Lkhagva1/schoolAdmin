@@ -31,9 +31,11 @@ import {
 import { BiExpand, BiPaperPlane, BiSearch } from "react-icons/bi";
 import AuthContext from "../../hooks/UseAuth";
 import { useContext } from "react";
+import Cookies from "js-cookie";
 
 const Header = ({ onOpen, ...rest }) => {
   const { logoutHandler } = useContext(AuthContext);
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -116,7 +118,7 @@ const Header = ({ onOpen, ...rest }) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Нэр</Text>
+                  <Text fontSize="sm">{Cookies.get("user")}</Text>
                   <Text fontSize="xs" color="#45a735">
                     Admin
                   </Text>

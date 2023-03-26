@@ -1,4 +1,4 @@
-import { FiGrid, FiUsers, FiLayers } from "react-icons/fi";
+import { FiGrid, FiUsers, FiLayers, FiSlack } from "react-icons/fi";
 import {
   BiBuildings,
   BiBookReader,
@@ -52,72 +52,48 @@ export const navData = [
     ],
   },
   {
-    title: "Хэлтэс",
-    toLink: "/department",
+    title: "Клуб",
+    toLink: "/club",
     icon: BiBuildings,
     subTitle: [
       {
-        title: "Бүх Хэлтэс",
-        toLink: "/department/all",
+        title: "Бүх Клуб",
+        toLink: "/club",
         icon: BiBuildings,
       },
       {
-        title: "Хэлтэс нэмэх",
-        toLink: "/department/add",
+        title: "клуб нэмэх",
+        toLink: "/club/add",
         icon: BiBuildings,
       },
     ],
   },
   {
-    title: "Тэнхим",
-    toLink: "/facults",
+    title: "Гомдол",
+    toLink: "/complain",
     icon: FiLayers,
-    subTitle: [
-      {
-        title: "Бүх тэнхим",
-        toLink: "/facults/all",
-        icon: FiLayers,
-      },
-      {
-        title: "Тэнхим нэмэх",
-        toLink: "/facults/add",
-        icon: FiLayers,
-      },
-    ],
   },
   {
-    title: "Курс",
-    toLink: "/courses",
+    title: "Мэдэгдэл илгээх",
+    toLink: "/notice",
     icon: BiBookReader,
     subTitle: [
       {
-        title: "Бүх Курс",
-        toLink: "/courses/all",
+        title: "Бүх мэдэгдэл",
+        toLink: "/notice",
         icon: BiBookReader,
       },
       {
-        title: "Курс нэмэх",
-        toLink: "/courses/add",
+        title: "мэдэгдэл илгээх",
+        toLink: "/notice/add",
         icon: BiBookReader,
       },
     ],
   },
   {
-    title: "Амралт",
-    toLink: "/holiday",
-    icon: BiHotel,
-    subTitle: [
-      {
-        title: "Бүх Амралт",
-        toLink: "/holiday/all",
-        icon: BiHotel,
-      },
-      {
-        title: "Амралт нэмэх",
-        toLink: "/holiday/add",
-        icon: BiHotel,
-      },
-    ],
+    title: "Үзэх хичээл",
+    toLink: "/subject",
+    icon: FiSlack,
   },
   {
     title: "Хуанли",

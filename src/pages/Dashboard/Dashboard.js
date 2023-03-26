@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
   Card,
   Flex,
   Grid,
-  HStack,
   SimpleGrid,
-  Stack,
   Table,
   Tbody,
   Text,
@@ -17,7 +15,6 @@ import {
   useColorMode,
   useColorModeValue,
   Td,
-  Progress,
   Link,
 } from "@chakra-ui/react";
 import { statsData } from "../../components/Dashboard/StatData";
@@ -31,20 +28,30 @@ import {
 import { calendarDataCalendar } from "../../components/Dashboard/CalendarData";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
-import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import LineChart from "../../components/charts/LineChart";
-import { pageVisits, socialTraffic } from "../../components/Variable/General";
 import BarChart from "../../components/charts/BarChart";
+import axios from "axios";
 
 const Dashboard = () => {
-  const iconBlue = useColorModeValue("blue.500", "blue.500");
-  const iconBoxInside = useColorModeValue("white", "white");
   const textColor = useColorModeValue("gray.700", "white");
   const tableRowColor = useColorModeValue("#F7FAFC", "navy.900");
   const borderColor = useColorModeValue("gray.200", "gray.600");
   const textTableColor = useColorModeValue("gray.500", "white");
   const events = [{ title: "Meeting", start: new Date() }];
   const { colorMode } = useColorMode();
+  const [teacherList, setTeacherList] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/getAllFac", {})
+      .then((res) => {
+        console.log("branch ---", res.data);
+        setTeacherList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <Flex
       flexDirection="column"
@@ -144,7 +151,7 @@ const Dashboard = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {pageVisits.map((el, index, arr) => {
+                  {teacherList.map((el, index, arr) => {
                     return (
                       <Tr key={index}>
                         <Td
@@ -154,7 +161,7 @@ const Dashboard = () => {
                           borderColor={borderColor}
                           border={index === arr.length - 1 ? "none" : null}
                         >
-                          {el.pageName}
+                          {el.surname}
                         </Td>
                         <Td
                           color={textTableColor}
@@ -162,7 +169,7 @@ const Dashboard = () => {
                           border={index === arr.length - 1 ? "none" : null}
                           borderColor={borderColor}
                         >
-                          {el.visitors}
+                          {el.teaching_area}
                         </Td>
                         <Td
                           color={textTableColor}
@@ -170,7 +177,7 @@ const Dashboard = () => {
                           border={index === arr.length - 1 ? "none" : null}
                           borderColor={borderColor}
                         >
-                          {el.uniqueUsers}
+                          {el.gender}
                         </Td>
                         <Td
                           color={textTableColor}
@@ -178,7 +185,7 @@ const Dashboard = () => {
                           border={index === arr.length - 1 ? "none" : null}
                           borderColor={borderColor}
                         >
-                          {el.bounceRate}
+                          {el.joining_year}
                         </Td>
                       </Tr>
                     );

@@ -19,7 +19,7 @@ import RoundedButton from "../../components/Button/RoundedButton";
 import AuthContext from "../../hooks/UseAuth";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const history = useHistory();
@@ -52,8 +52,8 @@ const Login = () => {
                 fontSize={15}
                 fontWeight={"normal"}
                 color={"#000"}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 _hover={{
                   borderColor: "#45A735",
                 }}
@@ -85,9 +85,9 @@ const Login = () => {
                   borderColor: "#45A735",
                 }}
                 onKeyPress={(e) => {
-                  if (username && password) {
+                  if (email && password) {
                     if (e.key === "Enter") {
-                      loginHandler(username, password);
+                      loginHandler(email, password);
                     }
                   }
                 }}
@@ -125,7 +125,7 @@ const Login = () => {
           <RoundedButton
             title={"Нэвтрэх"}
             width={"full"}
-            onClick={() => loginHandler(username, password)}
+            onClick={() => loginHandler(email, password)}
           />
         </VStack>
       </Flex>

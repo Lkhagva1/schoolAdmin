@@ -1,5 +1,14 @@
-import React from "react";
-import { Box, Card, CardHeader, HStack, Link, VStack } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Card,
+  CardHeader,
+  Heading,
+  HStack,
+  Link,
+  TableContainer,
+  VStack,
+} from "@chakra-ui/react";
 import {
   columnsData1,
   columnsData2,
@@ -26,57 +35,23 @@ import {
 } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
-import { FiTrash2, FiEdit, FiUserPlus } from "react-icons/fi";
+import { FiTrash2, FiEdit, FiUserPlus, FiEdit2 } from "react-icons/fi";
 import { FcGraduationCap } from "react-icons/fc";
-import {
-  TiArrowSortedDown,
-  TiArrowSortedUp,
-  TiArrowUnsorted,
-} from "react-icons/ti";
-import {
-  useGlobalFilter,
-  usePagination,
-  useSortBy,
-  useTable,
-} from "react-table";
+import axios from "axios";
+
 const Students = () => {
-  const columns = useMemo(() => columnsData1, []);
-  const data = useMemo(() => columnsData2, []);
-  const tableInstance = useTable(
-    {
-      columns,
-      data,
-    },
-    useGlobalFilter,
-    useSortBy,
-    usePagination
-  );
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    page,
-    gotoPage,
-    pageCount,
-    prepareRow,
-    nextPage,
-    previousPage,
-    canNextPage,
-    canPreviousPage,
-    setPageSize,
-    setGlobalFilter,
-    state,
-  } = tableInstance;
-  const createPages = (count) => {
-    let arrPageCount = [];
-
-    for (let i = 1; i <= count; i++) {
-      arrPageCount.push(i);
-    }
-
-    return arrPageCount;
-  };
-  const { pageIndex, pageSize, globalFilter } = state;
+  const [studentList, setStudentList] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/getAllStuClass", {})
+      .then((res) => {
+        // console.log("branch ---", res.data.data);
+        setStudentList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <Box ml="225px" mt={"30px"} bg={"white"} rounded="lg" boxShadow={"lg"}>
       <Card p="12px 5px" mb="12px" pl={"20px"}>
@@ -113,8 +88,8 @@ const Students = () => {
             minW={{ sm: "100px", md: "200px" }}
           >
             <Select
-              value={pageSize}
-              onChange={(e) => setPageSize(Number(e.target.value))}
+              // value={pageSize}
+              // onChange={(e) => setPageSize(Number(e.target.value))}
               color="#45a735"
               size="sm"
               borderRadius="12px"
@@ -138,83 +113,73 @@ const Students = () => {
             maxW="175px"
             fontSize="sm"
             _focus={{ borderColor: "#45a735" }}
-            onChange={(e) => setGlobalFilter(e.target.value)}
+            // onChange={(e) => setGlobalFilter(e.target.value)}
           />
         </Flex>
-        <Table
-          {...getTableProps()}
-          variant="striped"
-          color="gray.700"
-          mb="24px"
-        >
-          <Thead>
-            {headerGroups.map((headerGroup) => (
-              <Tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <Th
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                    pe="0px"
-                  >
-                    <Flex
-                      justify="space-between"
-                      align="center"
-                      fontSize={{ sm: "10px", lg: "12px" }}
-                      color="gray.400"
-                    >
-                      {column.render("Header")}
-                      <Icon
-                        w={{ sm: "10px", md: "14px" }}
-                        h={{ sm: "10px", md: "14px" }}
-                        color={columns.isSorted ? "gray.500" : "gray.400"}
-                        float="right"
-                        as={
-                          column.isSorted
-                            ? column.isSortedDesc
-                              ? TiArrowSortedDown
-                              : TiArrowSortedUp
-                            : TiArrowUnsorted
-                        }
-                      />
-                    </Flex>
-                  </Th>
-                ))}
-                <Th textAlign={"center"}>action</Th>
-              </Tr>
-            ))}
-          </Thead>
-          <Tbody {...getTableBodyProps()}>
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <Tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <Td {...cell.getCellProps()} fontSize={{ sm: "14px" }}>
-                        {cell.render("Cell")}
-                      </Td>
-                    );
-                  })}
-                  <Td textAlign={"center"}>
-                    <Button
-                      bg={"transparent"}
-                      fontSize="13px"
-                      // onClick={() => DeleteHandle(e._id)}
-                    >
-                      <FiEdit color="green" />
-                    </Button>
-                    <Button
-                      bg={"transparent"}
-                      fontSize="13px"
-                      // onClick={() => DeleteHandle(e._id)}
-                    >
-                      <FiTrash2 color="green" />
-                    </Button>
-                  </Td>
+        <Flex p={6} direction="column">
+          <Heading mb={4}></Heading>
+          <TableContainer>
+            <Table size="sm" variant="striped" alignItems="flex-end">
+              <Thead>
+                <Tr>
+                  <Th w="5%">ID</Th>
+                  <Th w="10%">Зураг</Th>
+                  <Th w="10%">Овог</Th>
+                  <Th w="10%">Нэр</Th>
+                  <Th w="10%">Эцэг Нэр</Th>
+                  <Th w="10%"> Эхийн Нэр</Th>
+                  <Th w="10%">цахим хаяг</Th>
+                  <Th w="10%">курс</Th>
+                  <Th w="10%">нас</Th>
+                  <Th w="10%">хүйс</Th>
+                  <Th w="10%">төрсөн өдөр</Th>
+                  <Th w="10%">Утас</Th>
+                  <Th w="10%">Roll no</Th>
+                  <Th w="10%">Хаяг</Th>
+                  <Th w="10%">элссэн он</Th>
+                  <Th w="10%">action</Th>
                 </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
+              </Thead>
+              <Tbody>
+                {studentList.map((e, index) => (
+                  <Tr key={index}>
+                    <Td>1</Td>
+                    <Td></Td>
+                    <Td>{e.surname}</Td>
+                    <Td>{e.name}</Td>
+                    <Td>{e.father_name}</Td>
+                    <Td>{e.mother_name}</Td>
+                    <Td>{e.email}</Td>
+                    <Td>{e.clsName} </Td>
+                    <Td>{e.age}</Td>
+                    <Td>{e.gender}</Td>
+                    <Td>{e.date_of_birth}</Td>
+                    <Td>{e.mobile}</Td>
+                    <Td>{e.Roll_No}</Td>
+                    <Td>{e.address}</Td>
+                    <Td>{e.addmision_year}</Td>
+                    <Td>
+                      <Button
+                        bg={"transparent"}
+                        fontSize="13px"
+                        // onClick={() => DeleteHandle(e._id)}
+                      >
+                        <FiEdit2 />
+                      </Button>
+                      <Button
+                        bg={"transparent"}
+                        fontSize="13px"
+                        // onClick={() => DeleteHandle(e._id)}
+                      >
+                        <FiTrash2 />
+                      </Button>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Flex>
         <Flex
           direction={{ sm: "column", md: "row" }}
           justify="space-between"
@@ -229,25 +194,21 @@ const Students = () => {
             fontWeight="normal"
             mb={{ sm: "24px", md: "0px" }}
           >
-            Showing {pageSize * pageIndex + 1} to{" "}
-            {pageSize * (pageIndex + 1) <= columnsData2.length
-              ? pageSize * (pageIndex + 1)
-              : columnsData2.length}{" "}
-            of {columnsData2.length} entries
+            qw123456
           </Text>
           <Stack direction="row" alignSelf="flex-end" spacing="4px" ms="auto">
             <Button
               variant="no-hover"
-              onClick={() => previousPage()}
+              // onClick={() => previousPage()}
               transition="all .5s ease"
               w="40px"
               h="40px"
               borderRadius="50%"
               bg="#fff"
               border="1px solid lightgray"
-              display={
-                pageSize === 5 ? "none" : canPreviousPage ? "flex" : "none"
-              }
+              // display={
+              //   pageSize === 5 ? "none" : canPreviousPage ? "flex" : "none"
+              // }
               _hover={{
                 bg: "gray.200",
                 opacity: "0.7",
@@ -256,59 +217,17 @@ const Students = () => {
             >
               <Icon as={GrFormPrevious} w="16px" h="16px" color="gray.400" />
             </Button>
-            {pageSize === 5 ? (
-              <NumberInput
-                max={pageCount - 1}
-                min={1}
-                w="75px"
-                mx="6px"
-                defaultValue="1"
-                onChange={(e) => gotoPage(e)}
-              >
-                <NumberInputField />
-                <NumberInputStepper>
-                  <NumberIncrementStepper onClick={() => nextPage()} />
-                  <NumberDecrementStepper onClick={() => previousPage()} />
-                </NumberInputStepper>
-              </NumberInput>
-            ) : (
-              createPages(pageCount).map((pageNumber) => {
-                return (
-                  <Button
-                    variant="no-hover"
-                    transition="all .5s ease"
-                    onClick={() => gotoPage(pageNumber - 1)}
-                    w="40px"
-                    h="40px"
-                    borderRadius="160px"
-                    bg={pageNumber === pageIndex + 1 ? "#45a735" : "#fff"}
-                    border="1px solid lightgray"
-                    _hover={{
-                      bg: "gray.200",
-                      opacity: "0.7",
-                      borderColor: "gray.500",
-                    }}
-                  >
-                    <Text
-                      fontSize="xs"
-                      color={pageNumber === pageIndex + 1 ? "#fff" : "gray.600"}
-                    >
-                      {pageNumber}
-                    </Text>
-                  </Button>
-                );
-              })
-            )}
+
             <Button
               variant="no-hover"
-              onClick={() => nextPage()}
+              // onClick={() => nextPage()}
               transition="all .5s ease"
               w="40px"
               h="40px"
               borderRadius="160px"
               bg="#fff"
               border="1px solid lightgray"
-              display={pageSize === 5 ? "none" : canNextPage ? "flex" : "none"}
+              // display={pageSize === 5 ? "none" : canNextPage ? "flex" : "none"}
               _hover={{
                 bg: "gray.200",
                 opacity: "0.7",

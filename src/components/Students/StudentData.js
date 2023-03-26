@@ -1,43 +1,61 @@
+import { Text } from "@chakra-ui/react";
+
 export const columnsData1 = [
   {
+    Header: "#",
+    Cell: ({ row }) => <Text>{row.index + 1}</Text>,
+  },
+  {
     Header: "ID",
-    accessor: "id",
+    accessor: "_id",
+  },
+  {
+    Header: "Зураг",
+    accessor: "pic",
+  },
+  {
+    Header: "Овог",
+    accessor: "surname",
   },
   {
     Header: "Нэр",
     accessor: "name",
   },
   {
-    Header: "Хэлтэс",
-    accessor: "department",
-  },
-  {
-    Header: "Утас",
-    accessor: "phone",
-  },
-  {
-    Header: "Хүйс",
-    accessor: "gender",
-  },
-  {
-    Header: "Орсон огноо",
-    accessor: "date",
-  },
-  {
-    Header: "Хаяг",
-    accessor: "Address",
-  },
-  {
     Header: "цахим хаяг",
     accessor: "email",
   },
   {
-    Header: "Status",
-    accessor: "status",
+    Header: "ажилтны Id",
+    accessor: "empolyee_id",
   },
   {
-    Header: "Боловсрол",
-    accessor: "degree",
+    Header: "нас",
+    accessor: "age",
+  },
+  {
+    Header: "хүйс",
+    accessor: "gender",
+  },
+  {
+    Header: "төрсөн өдөр",
+    accessor: "date_of_birth",
+  },
+  {
+    Header: "элссэн он",
+    accessor: "joining_year",
+  },
+  {
+    Header: "элссэн он",
+    accessor: "attdenList",
+  },
+  {
+    Header: "элссэн он",
+    accessor: "markList",
+  },
+  {
+    Header: "элссэн он",
+    accessor: "pList",
   },
 ];
 export const columnsData2 = [

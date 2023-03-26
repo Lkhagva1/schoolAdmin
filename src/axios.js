@@ -5,10 +5,11 @@ const token = Cookies.get("token");
 
 let instance;
 instance = axios.create({
-  baseURL: "https://reqres.in/",
+  // baseURL: "https://reqres.in/",
+  baseURL: "http://localhost:5000",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
   },
   cancelToken: source.token,
 });

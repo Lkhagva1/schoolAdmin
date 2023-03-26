@@ -1,18 +1,12 @@
+import React from "react";
 import {
   Box,
   Button,
   Card,
   FormControl,
-  FormHelperText,
   FormLabel,
   HStack,
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  Select,
   Stack,
   Text,
   Textarea,
@@ -21,46 +15,18 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useState } from "react";
 import { FcGraduationCap } from "react-icons/fc";
-import { FiUserPlus } from "react-icons/fi";
-import { Address, CName, Gender, QuaF } from "../../components/Variable/QuaF";
-import { Tarea } from "./../../components/Variable/QuaF";
-
-const StudentAdd = () => {
+import { useState } from "react";
+const ClubAdd = () => {
   const toast = useToast();
   const id = "test";
-  const [surname, setSurName] = useState("");
-  const [name, setName] = useState("");
-  const [mother_name, setMother_name] = useState("");
-  const [father_name, setFather_name] = useState("");
-  const [email, setEmail] = useState("");
-  const [Roll_No, setRoll_No] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [date_of_birth, setDate_of_birth] = useState("");
-  const [address, setAddress] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [clsName, setClsName] = useState("");
-  const [addmision_year, setAddmision_year] = useState("");
-  const [password, setPasword] = useState("");
-  const createStudent = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const createClub = () => {
     axios
-      .post("http://localhost:5000/stuReg", {
-        name,
-        surname,
-        mother_name,
-        father_name,
-        email,
-        Roll_No,
-        age,
-        gender,
-        date_of_birth,
-        address,
-        mobile,
-        clsName,
-        addmision_year,
-        password,
+      .post("http://localhost:5000/addclub", {
+        title,
+        content,
       })
       .then(function (response) {
         console.log("data", response);
@@ -90,20 +56,27 @@ const StudentAdd = () => {
       });
   };
   return (
-    <Box ml="225px" mt={"30px"} bg={"white"} rounded="lg" boxShadow={"lg"}>
+    <Box
+      ml="505px"
+      mr={"200px"}
+      mt={"30px"}
+      bg={"white"}
+      rounded="lg"
+      boxShadow={"lg"}
+    >
       <Card p="12px 5px" mb="12px" pl={"20px"}>
         <HStack direction={"column"}>
           <Text fontSize="20px" fontWeight="bold">
             <FcGraduationCap />
           </Text>
           <Text fontSize="15px" fontWeight="bold">
-            Сурагч нэмэх
+            Клуб нэмэх
           </Text>
           {/* <HStack>
-            <Button colorScheme={"green"} alignItems="center" textAlign={"end"}>
-              <FiUserPlus />
-            </Button>
-          </HStack> */}
+          <Button colorScheme={"green"} alignItems="center" textAlign={"end"}>
+            <FiUserPlus />
+          </Button>
+        </HStack> */}
         </HStack>
       </Card>
       <Stack
@@ -117,7 +90,7 @@ const StudentAdd = () => {
         pl="230px"
       >
         <VStack spacing={4} w="100%">
-          <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
+          {/* <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl isRequired>
               <FormLabel>Овог</FormLabel>
               <Input
@@ -233,46 +206,26 @@ const StudentAdd = () => {
                 type="number"
               />
             </FormControl>
-          </Stack>
+          </Stack> */}
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl>
-              <FormLabel>Нас</FormLabel>
-              <NumberInput max={50} min={0}>
-                <NumberInputField
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Утас</FormLabel>
+              <FormLabel>клубын нэр</FormLabel>
               <Input
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-                type="number"
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Roll nio</FormLabel>
-              <Input
-                value={Roll_No}
-                onChange={(e) => setRoll_No(e.target.value)}
-                type="number"
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Нууц үг</FormLabel>
-              <Input
-                value={password}
-                onChange={(e) => setPasword(e.target.value)}
-                type="password"
+                value={title}
+                h="50px"
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
               />
             </FormControl>
           </Stack>
+          <FormControl>
+            <FormLabel>Үйл ажиллагаа</FormLabel>
+            <Textarea
+              placeholder="үйл ажиллагааны тайлбар"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </FormControl>
         </VStack>
         <VStack w="100%">
           <Button
@@ -283,7 +236,7 @@ const StudentAdd = () => {
             }}
             rounded="md"
             w={{ base: "100%", md: "max-content" }}
-            onClick={() => createStudent()}
+            onClick={() => createClub()}
           >
             Бүртгэх
           </Button>
@@ -293,4 +246,4 @@ const StudentAdd = () => {
   );
 };
 
-export default StudentAdd;
+export default ClubAdd;
