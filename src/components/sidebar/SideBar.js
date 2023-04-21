@@ -20,7 +20,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import logo from "../../assets/logo/7799135-removebg.png";
+import logo from "../../assets/img/001.png";
 import img from "../../assets/infire/Regular/fatal error_2.png";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { navData } from "./SideBarData";
