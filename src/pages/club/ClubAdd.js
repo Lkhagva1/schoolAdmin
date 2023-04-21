@@ -25,8 +25,8 @@ const ClubAdd = () => {
   const createClub = () => {
     axios
       .post("http://localhost:5000/addclub", {
-        title,
-        content,
+        name: title,
+        description: content,
       })
       .then(function (response) {
         console.log("data", response);
@@ -41,6 +41,7 @@ const ClubAdd = () => {
         }
       })
       .catch(function (error) {
+        console.log(error);
         if (!toast.isActive(id)) {
           toast({
             id,
@@ -52,7 +53,6 @@ const ClubAdd = () => {
               : "Алдаа гарлаа!",
           });
         }
-        console.log(error);
       });
   };
   return (
@@ -90,123 +90,6 @@ const ClubAdd = () => {
         pl="230px"
       >
         <VStack spacing={4} w="100%">
-          {/* <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
-            <FormControl isRequired>
-              <FormLabel>Овог</FormLabel>
-              <Input
-                value={surname}
-                onChange={(e) => setSurName(e.target.value)}
-                placeholder="овог"
-              />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Нэр</FormLabel>
-              <Input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                placeholder="Ahmad"
-                rounded="md"
-              />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Эхийн нэр</FormLabel>
-              <Input
-                value={mother_name}
-                onChange={(e) => setMother_name(e.target.value)}
-                type="text"
-                placeholder="Ahmad"
-                rounded="md"
-              />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Эцэг нэр</FormLabel>
-              <Input
-                value={father_name}
-                onChange={(e) => setFather_name(e.target.value)}
-                type="text"
-                placeholder="Ahmad"
-                rounded="md"
-              />
-            </FormControl>
-          </Stack>
-          <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
-            <FormControl isRequired>
-              <FormLabel>Хүйс</FormLabel>
-              <Select
-                placeholder="Хүйс сонгох"
-                value={gender}
-                id="selectId"
-                onChange={(e) => setGender(e.target.value)}
-              >
-                {Gender.map((item) => (
-                  <option value={item} key={item}>
-                    {" "}
-                    {item}{" "}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>курс</FormLabel>
-              <Select
-                placeholder="курс сонгох"
-                id="selectId"
-                value={clsName}
-                onChange={(e) => setClsName(e.target.value)}
-              >
-                {CName.map((item) => (
-                  <option value={item} key={item}>
-                    {" "}
-                    {item}{" "}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl>
-              <FormLabel>Хаяг</FormLabel>
-              <Select
-                placeholder="Хаяг сонгох"
-                id="selectId"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              >
-                {Address.map((item) => (
-                  <option value={item} key={item}>
-                    {" "}
-                    {item}{" "}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Stack>
-          <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
-            <FormControl>
-              <FormLabel>Цахим хаяг</FormLabel>
-              <Input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-              />
-              <FormHelperText>We'll never share your email.</FormHelperText>
-            </FormControl>
-            <FormControl>
-              <FormLabel>төрсөн он сар өдөр</FormLabel>
-              <Input
-                value={date_of_birth}
-                onChange={(e) => setDate_of_birth(e.target.value)}
-                type="date"
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel>элссэн он</FormLabel>
-              <Input
-                value={addmision_year}
-                onChange={(e) => setAddmision_year(e.target.value)}
-                type="number"
-              />
-            </FormControl>
-          </Stack> */}
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl>
               <FormLabel>клубын нэр</FormLabel>

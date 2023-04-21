@@ -82,11 +82,11 @@ const Club = () => {
             <FcGraduationCap />
           </Text>
           <Text fontSize="15px" fontWeight="bold">
-            Бүх сурагчид
+            Бүх клуб
           </Text>
           <HStack>
             <Button colorScheme={"green"} alignItems="center" textAlign={"end"}>
-              <Link href="/students/add">
+              <Link href="/club/add">
                 <FiUserPlus />
               </Link>
             </Button>
