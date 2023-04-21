@@ -207,67 +207,6 @@ const Dashboard = () => {
             </Flex>
           </Flex>
           <BarChart chartData={barChartData} chartOptions={barChartOptions} />
-          {/* <Box overflow={{ sm: "scroll", lg: "hidden" }}>
-            <Table>
-              <Thead>
-                <Tr bg={tableRowColor}>
-                  <Th color="gray.400" borderColor={borderColor}>
-                    Referral
-                  </Th>
-                  <Th color="gray.400" borderColor={borderColor}>
-                    Visitors
-                  </Th>
-                  <Th color="gray.400" borderColor={borderColor}></Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {socialTraffic.map((el, index, arr) => {
-                  return (
-                    <Tr key={index}>
-                      <Td
-                        color={textTableColor}
-                        fontSize="sm"
-                        fontWeight="bold"
-                        borderColor={borderColor}
-                        border={index === arr.length - 1 ? "none" : null}
-                      >
-                        {el.referral}
-                      </Td>
-                      <Td
-                        color={textTableColor}
-                        fontSize="sm"
-                        borderColor={borderColor}
-                        border={index === arr.length - 1 ? "none" : null}
-                      >
-                        {el.visitors}
-                      </Td>
-                      <Td
-                        color={textTableColor}
-                        fontSize="sm"
-                        borderColor={borderColor}
-                        border={index === arr.length - 1 ? "none" : null}
-                      >
-                        <Flex align="center">
-                          <Text
-                            color={textTableColor}
-                            fontWeight="bold"
-                            fontSize="sm"
-                            me="12px"
-                          >{`${el.percentage}%`}</Text>
-                          <Progress
-                            size="xs"
-                            colorScheme={el.color}
-                            value={el.percentage}
-                            minW="120px"
-                          />
-                        </Flex>
-                      </Td>
-                    </Tr>
-                  );
-                })}
-              </Tbody>
-            </Table>
-          </Box> */}
         </Card>
       </Grid>
     </Flex>

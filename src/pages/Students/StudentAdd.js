@@ -137,22 +137,23 @@ const StudentAdd = () => {
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Эхийн нэр</FormLabel>
+              <FormLabel>хэлбэр</FormLabel>
               <Input
                 value={mother_name}
                 onChange={(e) => setMother_name(e.target.value)}
                 type="text"
-                placeholder="Ahmad"
+                placeholder="хэлбэр"
                 rounded="md"
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Эцэг нэр</FormLabel>
+              <FormLabel>Регистер</FormLabel>
               <Input
                 value={father_name}
                 onChange={(e) => setFather_name(e.target.value)}
                 type="text"
-                placeholder="Ahmad"
+                placeholder="Регистер
+                "
                 rounded="md"
               />
             </FormControl>
@@ -257,11 +258,11 @@ const StudentAdd = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Roll nio</FormLabel>
+              <FormLabel>код</FormLabel>
               <Input
                 value={Roll_No}
                 onChange={(e) => setRoll_No(e.target.value)}
-                type="number"
+                type="text0"
               />
             </FormControl>
             <FormControl>

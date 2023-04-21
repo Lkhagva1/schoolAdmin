@@ -1,36 +1,32 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
 import Cookies from "js-cookie";
 import { useToast } from "@chakra-ui/react";
-import { useHistory, useLocation } from "react-router-dom";
+
 import axios from "axios";
 const AuthContext = createContext();
 
 export const UseAuth = (props) => {
-  const history = useHistory();
   const toast = useToast();
-  const id = "toast";
-  // const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const id = "toast";
 
-  // };
-
-  const loginHandler = async (email, password, type) => {
-    // console.log("login", user, password);
+  const loginHandler = async (email, password) => {
+    setIsLoading(true);
     axios
       .post("http://localhost:5000/signin", {
         email: email,
         password: password,
       })
       .then((result) => {
-        console.log("login result -->", result.data);
+        console.log("login result -->", result.data.token);
+        window.location.href = "/dashboard";
         Cookies.set("jwt", result.data.token);
         Cookies.set("user", result.data.user.lastname);
         Cookies.set("isLoggedIn", true);
-        localStorage.setItem(
-          "currentUser",
-          JSON.stringify(result.data.lastname)
-        );
+        setIsLoading(false);
+        setIsLoggedIn(true);
         if (!toast.isActive(id)) {
           toast({
             id,
@@ -42,6 +38,7 @@ export const UseAuth = (props) => {
         }
       })
       .catch((result) => {
+        setIsLoading(false);
         console.log("login err -->", result.data);
         if (!toast.isActive(id)) {
           toast({
@@ -49,24 +46,27 @@ export const UseAuth = (props) => {
             duration: 2000,
             position: "top",
             status: "error",
-            description:
-              result.response.status === 400
-                ? "Таны нэвтрэх нэр эсвэл нууц үг буруу байна!"
-                : "Холболтын алдаа",
+            description: "Таны нэвтрэх нэр эсвэл нууц үг буруу байна!",
           });
         }
       });
   };
 
-  const logoutHandler = async () => {
+  const logoutHandler = () => {
+    // setIsLoading(true);
+    window.location.href = "/login";
     Cookies.remove("jwt");
     Cookies.remove("user");
     Cookies.remove("isLoggedIn");
+    setIsLoggedIn(false);
   };
 
   return (
     <AuthContext.Provider
       value={{
+        isLoading,
+        isLoggedIn,
+        setIsLoading,
         loginHandler,
         logoutHandler,
       }}

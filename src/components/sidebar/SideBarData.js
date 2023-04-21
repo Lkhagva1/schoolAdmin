@@ -14,14 +14,14 @@ import {
 export const navData = [
   {
     title: "Хянах самбар",
-    toLink: "dashboard",
+    toLink: "/dashboard",
     icon: FiGrid,
   },
   {
     title: "Сурагч",
     toLink: "/students",
     icon: BiFace,
-    subTitle: [
+    drop: [
       {
         title: "Бүх сурагч",
         toLink: "/students",
@@ -38,7 +38,7 @@ export const navData = [
     title: "Багш",
     toLink: "/teachers",
     icon: FiUsers,
-    subTitle: [
+    drop: [
       {
         title: "Бүх багш",
         toLink: "/teachers",
@@ -55,7 +55,7 @@ export const navData = [
     title: "Клуб",
     toLink: "/club",
     icon: BiBuildings,
-    subTitle: [
+    drop: [
       {
         title: "Бүх Клуб",
         toLink: "/club",
@@ -77,7 +77,7 @@ export const navData = [
     title: "Мэдэгдэл илгээх",
     toLink: "/notice",
     icon: BiBookReader,
-    subTitle: [
+    drop: [
       {
         title: "Бүх мэдэгдэл",
         toLink: "/notice",
@@ -110,10 +110,10 @@ export const navData = [
     title: "номын сан",
     toLink: "/library",
     icon: BiBookBookmark,
-    subTitle: [
+    drop: [
       {
         title: "Бүх номын сан",
-        toLink: "/library/all",
+        toLink: "/library",
         icon: BiBookBookmark,
       },
     ],
@@ -124,15 +124,8 @@ export const navData = [
     icon: BiChat,
   },
   {
-    title: "Цалин",
-    toLink: "/fees",
-    icon: BiWallet,
-    subTitle: [
-      {
-        title: "Бүх багш цалин",
-        toLink: "/fees/all",
-        icon: BiWallet,
-      },
-    ],
+    title: "login",
+    toLink: "/login",
+    icon: BiBookBookmark,
   },
 ];

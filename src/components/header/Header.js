@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   IconButton,
   Avatar,
@@ -29,13 +29,16 @@ import {
   FiSearch,
 } from "react-icons/fi";
 import { BiExpand, BiPaperPlane, BiSearch } from "react-icons/bi";
-import AuthContext from "../../hooks/UseAuth";
+
 import { useContext } from "react";
 import Cookies from "js-cookie";
+import { navData } from "../sidebar/SideBarData";
+import { useLocation } from "react-router-dom";
+import UseAuth from "../../hooks/UseAuth";
 
 const Header = ({ onOpen, ...rest }) => {
-  const { logoutHandler } = useContext(AuthContext);
-
+  const location = useLocation();
+  const { logoutHandler } = useContext(UseAuth);
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -58,8 +61,73 @@ const Header = ({ onOpen, ...rest }) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
-      <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+      <VStack
+        alignItems={"flex-start"}
+        spacing={0}
+        display={{ base: "none", base: "none", lg: "flex" }}
+      >
+        <Breadcrumb
+          spacing="4px"
+          separator={<FiChevronRight color="gray.500" />}
+        >
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/dashboard" fontSize={12}>
+              Хуудас
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          {navData.filter((e) => e.toLink !== "/profile") ? (
+            location.pathname === "/" ? null : location.pathname ? (
+              <BreadcrumbItem>
+                <BreadcrumbLink href={location.pathname} fontSize={12}>
+                  {
+                    navData.find(
+                      (e) =>
+                        e.toLink.split("/")[1] ===
+                        location.pathname.split("/")[1]
+                    ).title
+                  }
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            ) : null
+          ) : null}
+        </Breadcrumb>
+        <Text color={"#45A735"} fontWeight={"medium"} fontSize={12}>
+          {location.pathname === "/dashboard"
+            ? "Хяналтын самбар"
+            : location.pathname === "/profile"
+            ? "Профайл"
+            : location.pathname === "/students"
+            ? "Сурагч"
+            : location.pathname === "/students/add"
+            ? "Сурагч нэмэх"
+            : location.pathname === "/teachers"
+            ? "Багш"
+            : location.pathname === "/teachers/add"
+            ? "Багш нэмэх"
+            : location.pathname === "/club"
+            ? "клуб"
+            : location.pathname === "/club/add"
+            ? "клуб нэмэх"
+            : location.pathname === "/complain"
+            ? "гомдол"
+            : location.pathname === "/notice"
+            ? "мэдэгдэл"
+            : location.pathname === "/notice/add"
+            ? "мэдэгдэл нэмэх"
+            : location.pathname === "/subject"
+            ? "үзэх хичээл"
+            : location.pathname === "/calendar"
+            ? "хуанли"
+            : location.pathname === "/event"
+            ? "үйл ажиллагаа"
+            : location.pathname === "/library"
+            ? "номын сан"
+            : location.pathname === "/chat"
+            ? "чат"
+            : null}
+        </Text>
+      </VStack>
+      <Flex flex={{ base: 1 }} justify={{ base: "center", md: "end" }}>
         <Box
           textAlign={{ base: "center", md: "left" }}
           fontFamily={"heading"}

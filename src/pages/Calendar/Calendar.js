@@ -4,11 +4,6 @@ import React from "react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { calendarDataCalendar } from "../../components/Dashboard/CalendarData";
-import {
-  lineChartDataCharts2,
-  lineChartOptionsCharts2,
-} from "../../components/Variable/ChartData";
-import ReactApexChart from "react-apexcharts";
 
 const Calendar = () => {
   return (

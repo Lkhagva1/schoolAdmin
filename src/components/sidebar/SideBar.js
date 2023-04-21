@@ -16,27 +16,19 @@ import {
   Stack,
   HStack,
   Center,
-  VStack,
-  Menu,
-  MenuButton,
-  Avatar,
-  MenuList,
-  Button,
-  MenuItem,
-  color,
-  MenuDivider,
   Link,
+  VStack,
 } from "@chakra-ui/react";
-import { navData } from "./SideBarData";
 
 import logo from "../../assets/logo/7799135-removebg.png";
 import img from "../../assets/infire/Regular/fatal error_2.png";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
-const SideBar = ({ onClose, ...rest }) => {
+import { navData } from "./SideBarData";
+const SideBar = () => {
   const location = useLocation();
   const history = useHistory();
   return (
-    <Box
+    <Flex
       transition="3s ease"
       bg={useColorModeValue("white", "gray.900")}
       borderRight="1px"
@@ -59,7 +51,6 @@ const SideBar = ({ onClose, ...rest }) => {
       boxShadow={"md"}
       rounded={"lg"}
       h="full"
-      {...rest}
     >
       <VStack align={"center"} mx={"3"} justify={"space-between"} h={"full"}>
         <Flex
@@ -83,33 +74,35 @@ const SideBar = ({ onClose, ...rest }) => {
               objectFit="contain"
               width={{ base: "50%", md: "full", lg: "full" }}
             />
-            <CloseButton
-              display={{ base: "block", md: "none" }}
-              onClick={onClose}
-            />
+            <CloseButton display={{ base: "block", md: "none" }} />
           </HStack>
         </Flex>
         <Divider />
         <Accordion allowMultiple w="100%">
           <Stack spacing={1}>
             {navData.map((e, index) =>
-              e.subTitle ? (
+              e.drop ? (
                 <AccordionItem key={index} border="none">
                   <AccordionButton
                     _focus={{ border: "none" }}
                     justifyContent={"space-between"}
                     _hover={{
-                      backgroundColor: "#f2f2f2",
+                      backgroundColor: "#F7F7F7",
                       borderRadius: 10,
                     }}
-                    as={NavLink}
-                    to={e.toLink}
+                    style={{
+                      textDecoration: "none",
+                      width: "90%",
+                      padding: 7,
+                    }}
+                    as={Link}
+                    // t={e.toLink}
                     m={0}
                   >
                     <HStack align="center" cursor="pointer">
                       <Center
                         bg={
-                          location.pathname.split("/")[1] ===
+                          history.location.pathname.split("/")[1] ===
                           e.toLink.split("/")[1]
                             ? "#45A735"
                             : "#fff"
@@ -121,7 +114,7 @@ const SideBar = ({ onClose, ...rest }) => {
                         <Icon
                           fontSize="16"
                           color={
-                            location.pathname.split("/")[1] ===
+                            history.location.pathname.split("/")[1] ===
                             e.toLink.split("/")[1]
                               ? "#fff"
                               : "#45A735"
@@ -132,14 +125,14 @@ const SideBar = ({ onClose, ...rest }) => {
                       <Text
                         w={"full"}
                         color={
-                          location.pathname.split("/")[1] ===
+                          history.location.pathname.split("/")[1] ===
                           e.toLink.split("/")[1]
                             ? "#000"
                             : "#A0A0A0"
                         }
                         fontSize={"sm"}
                         fontWeight={
-                          location.pathname.split("/")[1] ===
+                          history.location.pathname.split("/")[1] ===
                           e.toLink.split("/")[1]
                             ? "medium"
                             : "normal"
@@ -149,29 +142,32 @@ const SideBar = ({ onClose, ...rest }) => {
                         {e.title}
                       </Text>
                     </HStack>
-
                     <AccordionIcon
                       color={
-                        location.pathname.split("/")[1] ===
+                        history.location.pathname.split("/")[1] ===
                         e.toLink.split("/")[1]
-                          ? "#45a735"
-                          : "#45a735"
+                          ? "#000"
+                          : "#A0A0A0"
                       }
                     />
                   </AccordionButton>
                   <AccordionPanel py={0} my={2}>
                     <VStack align="center" cursor="pointer" ml={2}>
-                      {e.subTitle.map((e, i) => (
-                        // <NavLink>
-
+                      {e.drop.map((e, i) => (
                         <HStack
                           key={i}
-                          as={NavLink}
-                          to={e.toLink}
+                          as={Link}
+                          href={e.toLink}
                           alignSelf="flex-start"
                           align={"center"}
                           w={"100%"}
                           p={2}
+                          style={{
+                            textDecoration: "none",
+
+                            width: "90%",
+                            padding: 8,
+                          }}
                           mt={e.title === "Interval" ? 4 : 0}
                           transition="all 0.3s"
                           _hover={{
@@ -181,9 +177,8 @@ const SideBar = ({ onClose, ...rest }) => {
                         >
                           <Icon
                             fontSize="16"
-                            to={e.toLink}
                             color={
-                              location.pathname.split("/")[2] ===
+                              history.location.pathname.split("/")[2] ===
                               e.toLink.split("/")[2]
                                 ? "#45A735"
                                 : "#A0A0A0"
@@ -193,14 +188,14 @@ const SideBar = ({ onClose, ...rest }) => {
                           <Text
                             w={"full"}
                             color={
-                              location.pathname.split("/")[2] ===
+                              history.location.pathname.split("/")[2] ===
                               e.toLink.split("/")[2]
                                 ? "#000"
                                 : "#A0A0A0"
                             }
                             fontSize={"sm"}
                             fontWeight={
-                              location.pathname.split("/")[2] ===
+                              history.location.pathname.split("/")[2] ===
                               e.toLink.split("/")[2]
                                 ? "medium"
                                 : "normal"
@@ -209,33 +204,30 @@ const SideBar = ({ onClose, ...rest }) => {
                             {e.title}
                           </Text>
                         </HStack>
-                        // {/* </NavLink> */}
                       ))}
                     </VStack>
                   </AccordionPanel>
                 </AccordionItem>
-              ) : e.toLink === "/" ? null : (
-                <NavLink
-                  className={"navLink"}
+              ) : e.toLink === "/profile" || e.toLink === "/login" ? null : (
+                <Link
+                  className={"Link"}
                   key={index}
-                  to={e.toLink}
+                  href={e.toLink}
                   style={{
                     textDecoration: "none",
-                    alignSelf: "center",
-                    width: "100%",
-                    marginLeft: "30px",
-                    marginTop: "8px",
-                    marginBottom: "8px",
+
+                    width: "90%",
+                    padding: 8,
                   }}
                   activeStyle={{
-                    backgroundColor: "#f8f8f8",
+                    backgroundColor: "#fff",
                     borderRadius: 10,
                   }}
                 >
                   <HStack align="center" cursor="pointer">
                     <Center
                       bg={
-                        location.pathname.split("/")[1] ===
+                        history.location.pathname.split("/")[1] ===
                         e.toLink.split("/")[1]
                           ? "#45A735"
                           : "#fff"
@@ -247,7 +239,7 @@ const SideBar = ({ onClose, ...rest }) => {
                       <Icon
                         fontSize="16"
                         color={
-                          location.pathname.split("/")[1] ===
+                          history.location.pathname.split("/")[1] ===
                           e.toLink.split("/")[1]
                             ? "#fff"
                             : "#45A735"
@@ -258,14 +250,14 @@ const SideBar = ({ onClose, ...rest }) => {
                     <Text
                       w={"full"}
                       color={
-                        location.pathname.split("/")[1] ===
+                        history.location.pathname.split("/")[1] ===
                         e.toLink.split("/")[1]
                           ? "#000"
                           : "#A0A0A0"
                       }
                       fontSize={"sm"}
                       fontWeight={
-                        location.pathname.split("/")[1] ===
+                        history.location.pathname.split("/")[1] ===
                         e.toLink.split("/")[1]
                           ? "medium"
                           : "normal"
@@ -275,7 +267,7 @@ const SideBar = ({ onClose, ...rest }) => {
                       {e.title}
                     </Text>
                   </HStack>
-                </NavLink>
+                </Link>
               )
             )}
           </Stack>
@@ -298,7 +290,7 @@ const SideBar = ({ onClose, ...rest }) => {
           />
         </Flex>
       </VStack>
-    </Box>
+    </Flex>
   );
 };
 

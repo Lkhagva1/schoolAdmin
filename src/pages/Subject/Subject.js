@@ -155,16 +155,16 @@ const Subject = () => {
             <Stack spacing={5} direction="row">
               <Radio
                 colorScheme="red"
-                value="Theoretical"
-                checked={selectedOption === "Theoretical"}
+                value="лекц"
+                checked={selectedOption === "лекц"}
                 onChange={(e) => setSelectedOption(e.target.value)}
               >
                 Лекц
               </Radio>
               <Radio
                 colorScheme="green"
-                value="Practical"
-                checked={selectedOption === "Practical"}
+                value="танхим"
+                checked={selectedOption === "танхим"}
                 onChange={(e) => setSelectedOption(e.target.value)}
               >
                 Танхим

@@ -10,21 +10,20 @@ import {
   Icon,
   Flex,
   Box,
+  Spinner,
 } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { BiLock, BiUserCircle, BiLockOpen } from "react-icons/bi";
+import { BiLock, BiUserCircle } from "react-icons/bi";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import RoundedButton from "../../components/Button/RoundedButton";
 import AuthContext from "../../hooks/UseAuth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
-  const history = useHistory();
-  const { loginHandler } = useContext(AuthContext);
-
+  // const history = useHistory();
+  const context = useContext(AuthContext);
+  // const { loginHandler } = useContext(AuthContext);
   return (
     <Box height={"full"}>
       {/* <Heading as="h3" size="lg" color={"#45A735"} fontWeight={"medium"}>
@@ -87,7 +86,7 @@ const Login = () => {
                 onKeyPress={(e) => {
                   if (email && password) {
                     if (e.key === "Enter") {
-                      loginHandler(email, password);
+                      context.loginHandler(email, password);
                     }
                   }
                 }}
@@ -112,8 +111,8 @@ const Login = () => {
                 variant={"link"}
                 fontWeight={"normal"}
                 fontSize={15}
-                // color={"#000"}
-                onClick={() => history.push("/signup")}
+                color={"#000"}
+                // onClick={() => history.push("/")}
                 alignItems={"center"}
                 justifyContent={"center"}
               >
@@ -122,11 +121,24 @@ const Login = () => {
               </Button>
             </HStack>
           </VStack>
-          <RoundedButton
-            title={"Нэвтрэх"}
+          <Button
+            bg={"#45A735"}
+            color={"#fff"}
+            fontSize={"15"}
+            _hover={{
+              bg: "#5AB54B",
+            }}
+            _focus={{
+              outline: "none",
+            }}
+            fontWeight={"normal"}
             width={"full"}
-            onClick={() => loginHandler(email, password)}
-          />
+            disabled={email && password && !context.isLoading ? false : true}
+            onClick={() => context.loginHandler(email, password)}
+          >
+            {context.isLoading ? <Spinner mr={2} size="sm" /> : null}
+            Нэвтрэх
+          </Button>
         </VStack>
       </Flex>
     </Box>

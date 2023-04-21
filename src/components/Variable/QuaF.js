@@ -3,16 +3,16 @@ export const Gender = ["Эрэгтэй", "Эмэгтэй"];
 export const CName = [1, 2, 3, 4, 5, 6];
 export const Credit_Data = [1, 2, 3, 4];
 export const Tarea = [
-  "ME",
-  "CSE",
-  "BBA",
-  "ECE",
-  "B.COM",
-  "CE",
-  "EE",
-  "HISTORY",
-  "ENGLISH",
-  "LAWS",
+  "сувилагч",
+  "програм хангам",
+  "Хүний эмч",
+  "хөдөлгөөн засалч",
+  "Санхүүгийн менежер",
+  "Шүдний эмч",
+  "Нэбо",
+  "эдийн засагч",
+  "интерьер дизайнер",
+  "Хүний Нөөцийн Менежер",
 ];
 export const Address = [
   "Улаанбаатар",
@@ -38,15 +38,4 @@ export const Address = [
   "Хөвсгөл",
   "Хэнтий",
 ];
-export const QuaF = [
-  "B.TECH",
-  "BSc",
-  "BA",
-  "MA",
-  "BCA",
-  "MCA",
-  "MBA",
-  "B.COM",
-  "M.COM",
-  "PhD",
-];
+export const QuaF = ["Бакалавр", "Магистр", "Доктор"];

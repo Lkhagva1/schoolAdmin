@@ -9,9 +9,6 @@ import Cookies from "js-cookie";
 import Main from "./pages/Main";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Login from "./pages/Auth/Login";
-import { useContext } from "react";
-import AuthContext from "./hooks/UseAuth";
 import Students from "./pages/Students/Students";
 import StudentAdd from "./pages/Students/StudentAdd";
 import Calendar from "./pages/Calendar/Calendar";
@@ -23,9 +20,15 @@ import Complain from "./pages/Complain/Complain";
 import Notice from "./pages/notice/Notice";
 import NoticeAdd from "./pages/notice/NoticeAdd";
 import Subject from "./pages/Subject/Subject";
+import Login from "./pages/Auth/Login";
+import { useContext } from "react";
+import { UseAuth } from "./hooks/UseAuth";
+
 function App() {
   const token = Cookies.get("jwt");
   const isLog = Cookies.get("isLoggedIn");
+  // console.log("log", isLog, token);
+  // window.location.reload(false);
   return (
     <Router>
       {isLog && token ? (
@@ -37,11 +40,14 @@ function App() {
             <Route exact path="/students">
               <Students />
             </Route>
-            <Route exact path="/students/add">
+            <Route path="/students/add">
               <StudentAdd />
             </Route>
             <Route exact path="/teachers">
               <Teacher />
+            </Route>
+            <Route path="/teachers/add">
+              <TeacherAdd />
             </Route>
             <Route exact path="/teachers/add">
               <TeacherAdd />
@@ -85,3 +91,44 @@ function App() {
 }
 
 export default App;
+/* <Main>
+<Switch>
+  <Route exact path="/dashboard">
+    <Dashboard />
+  </Route>
+  <Route exact path="/students">
+    <Students />
+  </Route>
+  <Route path="/students/add">
+    <StudentAdd />
+  </Route>
+  <Route exact path="/teachers">
+    <Teacher />
+  </Route>
+  <Route path="/teachers/add">
+    <TeacherAdd />
+  </Route>
+  <Route exact path="/club">
+    <Club />
+  </Route>
+  <Route path="/club/add">
+    <ClubAdd />
+  </Route>
+  <Route exact path="/complain">
+    <Complain />
+  </Route>
+  <Route exact path="/notice">
+    <Notice />
+  </Route>
+  <Route path="/notice/add">
+    <NoticeAdd />
+  </Route>
+  <Route exact path="/subject">
+    <Subject />
+  </Route>
+  <Route exact path="/calendar">
+    <Calendar />
+  </Route>
+  <Redirect to="/dashboard" />
+</Switch>
+</Main> */

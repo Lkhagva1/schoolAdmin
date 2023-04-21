@@ -59,11 +59,12 @@ const Teacher = () => {
   const deleteHandler = (id) => {
     console.log("DElETE data ---", id);
     axios
-      .delete("http://localhost:5000/getAllFac/", {
+      .delete("http://localhost:5000/getAllFac/:id", {
         data: {
           _id: id,
         },
       })
+
       .then((result) => {
         if (!toast.isActive(id)) {
           toast({
@@ -180,7 +181,7 @@ const Teacher = () => {
               <Tbody>
                 {teacherList.map((e, index) => (
                   <Tr key={index}>
-                    <Td>1</Td>
+                    <Td>{index + 1}</Td>
                     <Td></Td>
                     <Td>{e.surname}</Td>
                     <Td>{e.name}</Td>

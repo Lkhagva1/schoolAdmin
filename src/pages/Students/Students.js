@@ -126,8 +126,8 @@ const Students = () => {
                   <Th w="10%">Зураг</Th>
                   <Th w="10%">Овог</Th>
                   <Th w="10%">Нэр</Th>
-                  <Th w="10%">Эцэг Нэр</Th>
-                  <Th w="10%"> Эхийн Нэр</Th>
+                  <Th w="10%">Регистер</Th>
+                  <Th w="10%"> хэлбэр</Th>
                   <Th w="10%">цахим хаяг</Th>
                   <Th w="10%">курс</Th>
                   <Th w="10%">нас</Th>
@@ -143,7 +143,7 @@ const Students = () => {
               <Tbody>
                 {studentList.map((e, index) => (
                   <Tr key={index}>
-                    <Td>1</Td>
+                    <Td>{index + 1}</Td>
                     <Td></Td>
                     <Td>{e.surname}</Td>
                     <Td>{e.name}</Td>

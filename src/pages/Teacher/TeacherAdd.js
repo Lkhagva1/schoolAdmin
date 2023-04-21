@@ -247,7 +247,7 @@ const TeacherAdd = () => {
               <Input
                 value={empolyee_id}
                 onChange={(e) => setEmpolyee_id(e.target.value)}
-                type="number"
+                type="text"
               />
             </FormControl>
             <FormControl>
