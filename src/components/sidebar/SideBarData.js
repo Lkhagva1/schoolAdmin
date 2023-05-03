@@ -123,9 +123,19 @@ export const navData = [
     toLink: "/chat",
     icon: BiChat,
   },
+  // {
+  //   title: "Чат",
+  //   toLink: "/chats",
+  //   icon: BiChat,
+  // },
   {
     title: "login",
     toLink: "/login",
+    icon: BiBookBookmark,
+  },
+  {
+    title: "login",
+    toLink: "/chat/login",
     icon: BiBookBookmark,
   },
 ];

@@ -208,7 +208,10 @@ const SideBar = () => {
                     </VStack>
                   </AccordionPanel>
                 </AccordionItem>
-              ) : e.toLink === "/profile" || e.toLink === "/login" ? null : (
+              ) : e.toLink === "/profile" ||
+                e.toLink === "/login" ||
+                e.toLink === "/message/:id" ||
+                e.toLink === "/chat/login" ? null : (
                 <Link
                   className={"Link"}
                   key={index}

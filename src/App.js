@@ -4,6 +4,7 @@ import {
   Redirect,
   Route,
   Switch,
+  useHistory,
 } from "react-router-dom";
 import Cookies from "js-cookie";
 import Main from "./pages/Main";
@@ -21,14 +22,46 @@ import Notice from "./pages/notice/Notice";
 import NoticeAdd from "./pages/notice/NoticeAdd";
 import Subject from "./pages/Subject/Subject";
 import Login from "./pages/Auth/Login";
-import { useContext } from "react";
-import { UseAuth } from "./hooks/UseAuth";
-
+// import { auth } from "./firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import Sign from "./pages/chat/Sign";
+import Chat from "./pages/chat/Chat";
+import { auth, db } from "./firebase";
+import { User } from "firebase/auth";
+import { useState } from "react";
+import { useEffect } from "react";
+import { collection, onSnapshot } from "@firebase/firestore";
 function App() {
   const token = Cookies.get("jwt");
   const isLog = Cookies.get("isLoggedIn");
+  const [user, setUser] = useState(false);
+  // const [user, loading, error] = useAuthState(auth);
+  // const { user } = useContext(AuthProvider);
   // console.log("log", isLog, token);
   // window.location.reload(false);
+  // const [loading, setLoading] = useState(true);
+  // const [user, setUser] = useState({});
+  // const history = useHistory();
+  useEffect(() => {
+    const un = onAuthStateChanged(auth, (data) => {
+      setUser(data);
+      // setLoading(false);
+      // history.push("/chats");
+    });
+    onSnapshot(collection(db, "Messages"), (snap) => {
+      console.log(
+        "ewwwwwwww",
+        snap.docs.map((item) => {
+          const id = item.id;
+          return { id, ...item.data() };
+        })
+      );
+    });
+    return () => {
+      un();
+    };
+  });
   return (
     <Router>
       {isLog && token ? (
@@ -72,6 +105,9 @@ function App() {
             </Route>
             <Route exact path="/calendar">
               <Calendar />
+            </Route>
+            <Route exact path="/chat">
+              {user ? <Route path="/chat" component={Chat} /> : <Sign />}
             </Route>
             <Redirect to="/dashboard" />
           </Switch>

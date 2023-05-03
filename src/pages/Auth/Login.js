@@ -23,12 +23,8 @@ const Login = () => {
   const [show, setShow] = useState(false);
   // const history = useHistory();
   const context = useContext(AuthContext);
-  // const { loginHandler } = useContext(AuthContext);
   return (
     <Box height={"full"}>
-      {/* <Heading as="h3" size="lg" color={"#45A735"} fontWeight={"medium"}>
-        Нэвтрэх
-      </Heading> */}
       <Flex
         bg={"white"}
         p={12}
