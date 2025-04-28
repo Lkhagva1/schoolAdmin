@@ -80,7 +80,7 @@ const Subject = () => {
             <FcGraduationCap />
           </Text>
           <Text fontSize="15px" fontWeight="bold">
-            Үзэх хичээл
+            Lesson to watch
           </Text>
         </HStack>
       </Card>
@@ -97,21 +97,21 @@ const Subject = () => {
         <VStack spacing={4} w="100%">
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl>
-              <FormLabel>Хичээлийн нэр</FormLabel>
+              <FormLabel>Course name</FormLabel>
               <Input
                 value={sName}
                 h="50px"
-                placeholder="Хичээлийн нэр"
+                placeholder="Course name"
                 onChange={(e) => setsName(e.target.value)}
                 type="text"
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Хичээлийн код</FormLabel>
+              <FormLabel>Course code</FormLabel>
               <Input
                 value={sCode}
                 h="50px"
-                placeholder="Хичээлийн код"
+                placeholder="Course code"
                 onChange={(e) => setsCode(e.target.value)}
                 type="text"
               />
@@ -119,9 +119,9 @@ const Subject = () => {
           </Stack>
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl>
-              <FormLabel>курс</FormLabel>
+              <FormLabel>course</FormLabel>
               <Select
-                placeholder="курс сонгох"
+                placeholder="course select"
                 value={sClass}
                 id="selectId"
                 onChange={(e) => setsClass(e.target.value)}
@@ -135,9 +135,9 @@ const Subject = () => {
               </Select>
             </FormControl>
             <FormControl>
-              <FormLabel>кредит</FormLabel>
+              <FormLabel>credit</FormLabel>
               <Select
-                placeholder="кредит сонгох"
+                placeholder="credit select"
                 value={sCredit}
                 id="selectId"
                 onChange={(e) => setsCredit(e.target.value)}
@@ -159,7 +159,7 @@ const Subject = () => {
                 checked={selectedOption === "лекц"}
                 onChange={(e) => setSelectedOption(e.target.value)}
               >
-                Лекц
+                Lecture
               </Radio>
               <Radio
                 colorScheme="green"
@@ -167,7 +167,7 @@ const Subject = () => {
                 checked={selectedOption === "танхим"}
                 onChange={(e) => setSelectedOption(e.target.value)}
               >
-                Танхим
+                Chamber
               </Radio>
             </Stack>
           </RadioGroup>
@@ -183,7 +183,7 @@ const Subject = () => {
             w={{ base: "100%", md: "max-content" }}
             onClick={() => createNotice()}
           >
-            Бүртгэх
+            Register
           </Button>
         </VStack>
       </Stack>

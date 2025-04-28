@@ -34,14 +34,14 @@ const Login = () => {
       >
         <VStack w={"xs"} align={"flex-start"} spacing={10} mt={"200px"}>
           <Heading as="h3" size="lg" color={"#45A735"} fontWeight={"medium"}>
-            Нэвтрэх
+            Login
           </Heading>
           <VStack w={"full"} spacing={8}>
             <InputGroup alignItems={"center"} justifyContent={"center"}>
               <InputLeftElement children={<BiUserCircle color="black" />} />
               <Input
                 variant={"flushed"}
-                placeholder={"Хэрэглэгчийн нэр"}
+                placeholder={"admin"}
                 type={"text"}
                 width={"full"}
                 fontSize={15}
@@ -65,7 +65,7 @@ const Login = () => {
               />
               <Input
                 variant={"flushed"}
-                placeholder={"Нууц үг"}
+                placeholder={"password"}
                 type={show ? "text" : "password"}
                 width={"full"}
                 fontSize={15}
@@ -112,7 +112,7 @@ const Login = () => {
                 alignItems={"center"}
                 justifyContent={"center"}
               >
-                Нууц үг сэргээх
+                Password recovery
                 <Icon as={"<BiLockOpen />"} ml="1" />
               </Button>
             </HStack>
@@ -133,7 +133,7 @@ const Login = () => {
             onClick={() => context.loginHandler(email, password)}
           >
             {context.isLoading ? <Spinner mr={2} size="sm" /> : null}
-            Нэвтрэх
+            Login
           </Button>
         </VStack>
       </Flex>
