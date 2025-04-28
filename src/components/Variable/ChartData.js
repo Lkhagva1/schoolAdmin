@@ -78,11 +78,11 @@ export const lineChartOptionsCharts2 = {
 };
 export const lineChartDataCharts2 = [
   {
-    name: "Эрэгтэй сурагчид",
+    name: "Male students",
     data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
   },
   {
-    name: "эмэгтэй сурагчид",
+    name: "Female students",
     data: [400, 500, 40, 140, 290, 290, 340, 230, 400],
   },
 ];

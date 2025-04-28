@@ -5,7 +5,10 @@ import { useToast } from "@chakra-ui/react";
 
 import axios from "axios";
 const AuthContext = createContext();
-
+const user = {
+  password: "admin",
+  email: "admin"
+};
 export const UseAuth = (props) => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -14,51 +17,55 @@ export const UseAuth = (props) => {
 
   const loginHandler = async (email, password) => {
     setIsLoading(true);
-    axios
-      .post("http://localhost:5000/signin", {
-        email: email,
-        password: password,
-      })
-      .then((result) => {
-        console.log("login result -->", result.data.token);
-        window.location.href = "/dashboard";
-        Cookies.set("jwt", result.data.token);
-        Cookies.set("user", result.data.user.lastname);
-        Cookies.set("isLoggedIn", true);
-        setIsLoading(false);
-        setIsLoggedIn(true);
-        if (!toast.isActive(id)) {
-          toast({
-            id,
-            duration: 2000,
-            position: "top",
-            status: "success",
-            description: "амжилттай нэвтэрлээ!",
-          });
-        }
-      })
-      .catch((result) => {
-        setIsLoading(false);
-        console.log("login err -->", result.data);
-        if (!toast.isActive(id)) {
-          toast({
-            id,
-            duration: 2000,
-            position: "top",
-            status: "error",
-            description: "Таны нэвтрэх нэр эсвэл нууц үг буруу байна!",
-          });
-        }
-      });
+    if (email === user.email && password === user.password) {
+      console.log("login result -->", user.email);
+      window.location.href = "/dashboard";
+      Cookies.set("jwt", user.email);
+      Cookies.set("user", user.email);
+      Cookies.set("isLoggedIn", true);
+      setIsLoading(false);
+      setIsLoggedIn(true);
+
+      if (!toast.isActive(id)) {
+        toast({
+          id,
+          duration: 2000,
+          position: "top",
+          status: "success",
+          description: "Амжилттай нэвтэрлээ!",
+        });
+      }
+    } else {
+      setIsLoading(false);
+      if (!toast.isActive(id)) {
+        toast({
+          id,
+          duration: 2000,
+          position: "top",
+          status: "error",
+          description: "Таны нэвтрэх нэр эсвэл нууц үг буруу байна!",
+        });
+      }
+    }
   };
 
-  const logoutHandler = () => {
-    // setIsLoading(true);
-    window.location.href = "/login";
-    Cookies.remove("jwt");
-    Cookies.remove("user");
-    Cookies.remove("isLoggedIn");
-    setIsLoggedIn(false);
+  const logoutHandler =async (boolean) => {
+    console.log("logout result -->", boolean);
+    if (boolean === true) {
+      setIsLoading(true);
+
+      // Cookies-уудыг устгана
+      Cookies.remove("jwt");
+      Cookies.remove("user");
+      Cookies.remove("isLoggedIn");
+
+      // State-ийг шинэчилнэ
+      setIsLoggedIn(false);
+      setIsLoading(false);
+
+      // Нэвтрэх хуудас руу буцаана
+      window.location.href = "/login";
+    }
   };
 
   return (

@@ -26,6 +26,7 @@ import { FcGraduationCap } from "react-icons/fc";
 import { FiUserPlus } from "react-icons/fi";
 import { Address, Gender, QuaF, Tarea } from "../../components/Variable/QuaF";
 import axios from "axios";
+
 const TeacherAdd = () => {
   const toast = useToast();
   const id = "test";
@@ -42,50 +43,7 @@ const TeacherAdd = () => {
   const [teachArea, setTeaching_area] = useState("");
   const [joining_year, setjoining_year] = useState("");
   const [password, setPasword] = useState("");
-  const createHandler = () => {
-    axios
-      .post("http://localhost:5000/teachReg", {
-        name,
-        surname,
-        email,
-        empolyee_id,
-        qulification,
-        date_of_birth,
-        age,
-        gender,
-        joining_year,
-        address,
-        password,
-        mobile,
-        teaching_area: teachArea,
-      })
-      .then(function (response) {
-        console.log("data", response);
-        if (!toast.isActive(id)) {
-          toast({
-            id,
-            duration: 2000,
-            position: "top",
-            status: "success",
-            description: "Амжилттай!",
-          });
-        }
-      })
-      .catch(function (error) {
-        if (!toast.isActive(id)) {
-          toast({
-            id,
-            duration: 2000,
-            position: "top",
-            status: "error",
-            description: error.response.data.message
-              ? error.response.data.message
-              : "Алдаа гарлаа!",
-          });
-        }
-        console.log(error);
-      });
-  };
+
   return (
     <Box ml="225px" mt={"30px"} bg={"white"} rounded="lg" boxShadow={"lg"}>
       <Card p="12px 5px" mb="12px" pl={"20px"}>
@@ -94,7 +52,7 @@ const TeacherAdd = () => {
             <FcGraduationCap />
           </Text>
           <Text fontSize="15px" fontWeight="bold">
-            Багш нэмэх
+           Teacher add
           </Text>
         </HStack>
       </Card>
@@ -111,27 +69,27 @@ const TeacherAdd = () => {
         <VStack spacing={4} w="100%">
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl isRequired>
-              <FormLabel>Овог</FormLabel>
+              <FormLabel>Lastname</FormLabel>
               <Input
                 value={surname}
                 onChange={(e) => setSurName(e.target.value)}
-                placeholder="овог"
+                placeholder="lastname"
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Нэр</FormLabel>
+              <FormLabel>FirstName</FormLabel>
               <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
-                placeholder="Ahmad"
+                placeholder="FirstName"
                 rounded="md"
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Хүйс</FormLabel>
+              <FormLabel>Gender</FormLabel>
               <Select
-                placeholder="Хүйс сонгох"
+                placeholder="Gender select"
                 value={gender}
                 id="selectId"
                 onChange={(e) => setGender(e.target.value)}
@@ -145,9 +103,9 @@ const TeacherAdd = () => {
               </Select>
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Зэрэг</FormLabel>
+              <FormLabel>Degree</FormLabel>
               <Select
-                placeholder="зэрэг"
+                placeholder="Degree"
                 value={qulification}
                 id="selectId"
                 onChange={(e) => setQulification(e.target.value)}
@@ -161,9 +119,9 @@ const TeacherAdd = () => {
               </Select>
             </FormControl>
             <FormControl>
-              <FormLabel>Хаяг</FormLabel>
+              <FormLabel>Address</FormLabel>
               <Select
-                placeholder="Хаяг сонгох"
+                placeholder="Address select"
                 id="selectId"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -179,7 +137,7 @@ const TeacherAdd = () => {
           </Stack>
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl>
-              <FormLabel>Цахим хаяг</FormLabel>
+              <FormLabel>email</FormLabel>
               <Input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -188,7 +146,7 @@ const TeacherAdd = () => {
               <FormHelperText>We'll never share your email.</FormHelperText>
             </FormControl>
             <FormControl>
-              <FormLabel>төрсөн он сар өдөр</FormLabel>
+              <FormLabel>Birthday</FormLabel>
               <Input
                 value={date_of_birth}
                 onChange={(e) => setdate_of_birth(e.target.value)}
@@ -196,9 +154,9 @@ const TeacherAdd = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Тэнхим</FormLabel>
+              <FormLabel>Dept</FormLabel>
               <Select
-                placeholder="тэнхим сонгох"
+                placeholder="Dept select"
                 value={teachArea}
                 id="selectId"
                 onChange={(e) => setTeaching_area(e.target.value)}
@@ -212,7 +170,7 @@ const TeacherAdd = () => {
               </Select>
             </FormControl>
             <FormControl>
-              <FormLabel>элссэн он</FormLabel>
+              <FormLabel>year of admission</FormLabel>
               <Input
                 value={joining_year}
                 onChange={(e) => setjoining_year(e.target.value)}
@@ -222,7 +180,7 @@ const TeacherAdd = () => {
           </Stack>
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl>
-              <FormLabel>Нас</FormLabel>
+              <FormLabel>age</FormLabel>
               <NumberInput max={50} min={0}>
                 <NumberInputField
                   value={age}
@@ -235,7 +193,7 @@ const TeacherAdd = () => {
               </NumberInput>
             </FormControl>
             <FormControl>
-              <FormLabel>Утас</FormLabel>
+              <FormLabel>Phone</FormLabel>
               <Input
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
@@ -243,7 +201,7 @@ const TeacherAdd = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>ажилтны ID</FormLabel>
+              <FormLabel>employee ID</FormLabel>
               <Input
                 value={empolyee_id}
                 onChange={(e) => setEmpolyee_id(e.target.value)}
@@ -251,7 +209,7 @@ const TeacherAdd = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Нууц үг</FormLabel>
+              <FormLabel>password</FormLabel>
               <Input
                 value={password}
                 onChange={(e) => setPasword(e.target.value)}
@@ -269,9 +227,8 @@ const TeacherAdd = () => {
             }}
             rounded="md"
             w={{ base: "100%", md: "max-content" }}
-            onClick={() => createHandler()}
           >
-            Бүртгэх
+            Register
           </Button>
         </VStack>
       </Stack>

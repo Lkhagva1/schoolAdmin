@@ -9,10 +9,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import {
-  columnsData1,
-  columnsData2,
-} from "../../components/Students/StudentData";
-import {
   Button,
   Flex,
   Icon,
@@ -40,57 +36,48 @@ import { FcGraduationCap } from "react-icons/fc";
 import { FiTrash2, FiEdit, FiUserPlus, FiEdit2 } from "react-icons/fi";
 
 import axios from "axios";
-
+ const teacherData = [
+  {
+    "name": "Bat",
+    "surname": "Erdene",
+    "email": "bat.erdene@example.com",
+    "employee_id": "EMP001",
+    "qualification": "Bachelor of Education",
+    "date_of_birth": "1990-05-10",
+    "age": 34,
+    "gender": "male",
+    "joining_year": 2015,
+    "address": "Ulaanbaatar, Mongolia",
+    "password": "password123",
+    "mobile": "99119911",
+    "teaching_area": "Mathematics"
+  },
+  {
+    "name": "Sarantuya",
+    "surname": "Bold",
+    "email": "sara.bold@example.com",
+    "employee_id": "EMP002",
+    "qualification": "Master of Arts",
+    "date_of_birth": "1985-11-23",
+    "age": 39,
+    "gender": "female",
+    "joining_year": 2010,
+    "address": "Erdenet, Mongolia",
+    "password": "securepass456",
+    "mobile": "88118811",
+    "teaching_area": "History"
+  }
+]
 const Teacher = () => {
   const toast = useToast();
   const id = "test";
   const [teacherList, setTeacherList] = useState([]);
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/getAllFac", {})
-      .then((res) => {
-        // console.log("branch ---", res.data.data);
-        setTeacherList(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+ if (teacherData){
+   setTeacherList(teacherData)
+ }
   }, []);
-  const deleteHandler = (id) => {
-    console.log("DElETE data ---", id);
-    axios
-      .delete("http://localhost:5000/getAllFac/:id", {
-        data: {
-          _id: id,
-        },
-      })
 
-      .then((result) => {
-        if (!toast.isActive(id)) {
-          toast({
-            id,
-            duration: 2000,
-            position: "top",
-            status: "success",
-            description: "Амжилттай устлаа!",
-          });
-        }
-      })
-      .catch((err) => {
-        // console.log(err);
-        if (!toast.isActive(id)) {
-          toast({
-            id,
-            duration: 2000,
-            position: "top",
-            status: "error",
-            description: err.response.data.message
-              ? err.response.data.message
-              : "Алдаа гарлаа!",
-          });
-        }
-      });
-  };
   return (
     <Box ml="225px" mt={"30px"} bg={"white"} rounded="lg" boxShadow={"lg"}>
       <Card p="12px 5px" mb="12px" pl={"20px"}>
@@ -99,7 +86,7 @@ const Teacher = () => {
             <FcGraduationCap />
           </Text>
           <Text fontSize="15px" fontWeight="bold">
-            Бүх багш ажилчид
+            All teachers and staff
           </Text>
           <HStack>
             <Button colorScheme={"green"} alignItems="center" textAlign={"end"}>
@@ -141,12 +128,12 @@ const Teacher = () => {
               <option>25</option>
             </Select>
             <Text fontSize="xs" color="#45a735" fontWeight="normal">
-              хуудасны хувиарлалт
+              page layout
             </Text>
           </Stack>
           <Input
             type="text"
-            placeholder="хайх..."
+            placeholder="search..."
             minW="75px"
             maxW="175px"
             fontSize="sm"
@@ -162,19 +149,19 @@ const Teacher = () => {
               <Thead>
                 <Tr>
                   <Th w="5%">ID</Th>
-                  <Th w="10%">Зураг</Th>
-                  <Th w="10%">Овог</Th>
-                  <Th w="10%">Нэр</Th>
-                  <Th w="10%">цахим хаяг</Th>
-                  <Th w="10%">ажилтны Id</Th>
-                  <Th w="10%">нас</Th>
-                  <Th w="10%">хүйс</Th>
-                  <Th w="10%">төрсөн өдөр</Th>
-                  <Th w="10%">Хаяг</Th>
-                  <Th w="10%">Утас</Th>
-                  <Th w="10%">Зэрэг</Th>
-                  <Th w="10%">танхим</Th>
-                  <Th w="10%">элссэн он</Th>
+                  <Th w="10%">IMG</Th>
+                  <Th w="10%">Lastname</Th>
+                  <Th w="10%">firstname</Th>
+                  <Th w="10%">email</Th>
+                  <Th w="10%">employee Id</Th>
+                  <Th w="10%">age</Th>
+                  <Th w="10%">gender</Th>
+                  <Th w="10%">birthday</Th>
+                  <Th w="10%">address</Th>
+                  <Th w="10%">phone</Th>
+                  <Th w="10%">degree</Th>
+                  <Th w="10%">dept</Th>
+                  <Th w="10%">year of admission</Th>
                   <Th w="10%">action</Th>
                 </Tr>
               </Thead>
@@ -206,7 +193,6 @@ const Teacher = () => {
                       <Button
                         bg={"transparent"}
                         fontSize="13px"
-                        onClick={() => deleteHandler(e._id)}
                       >
                         <FiTrash2 />
                       </Button>

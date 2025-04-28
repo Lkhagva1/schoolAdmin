@@ -13,113 +13,113 @@ import {
 
 export const navData = [
   {
-    title: "Хянах самбар",
+    title: "dashboard",
     toLink: "/dashboard",
     icon: FiGrid,
   },
   {
-    title: "Сурагч",
+    title: "Students",
     toLink: "/students",
     icon: BiFace,
     drop: [
       {
-        title: "Бүх сурагч",
+        title: "All students",
         toLink: "/students",
         icon: BiFace,
       },
       {
-        title: "Сурагч нэмэх",
+        title: "Student add",
         toLink: "/students/add",
         icon: BiFace,
       },
     ],
   },
   {
-    title: "Багш",
+    title: "Teachers",
     toLink: "/teachers",
     icon: FiUsers,
     drop: [
       {
-        title: "Бүх багш",
+        title: "All Teachers",
         toLink: "/teachers",
         icon: FiUsers,
       },
       {
-        title: "Багш нэмэх",
+        title: "Teacher Add",
         toLink: "/teachers/add",
         icon: FiUsers,
       },
     ],
   },
   {
-    title: "Клуб",
+    title: "club",
     toLink: "/club",
     icon: BiBuildings,
     drop: [
       {
-        title: "Бүх Клуб",
+        title: "all club",
         toLink: "/club",
         icon: BiBuildings,
       },
       {
-        title: "клуб нэмэх",
+        title: "club add",
         toLink: "/club/add",
         icon: BiBuildings,
       },
     ],
   },
   {
-    title: "Гомдол",
+    title: "complain",
     toLink: "/complain",
     icon: FiLayers,
   },
   {
-    title: "Мэдэгдэл илгээх",
+    title: "notification",
     toLink: "/notice",
     icon: BiBookReader,
     drop: [
       {
-        title: "Бүх мэдэгдэл",
+        title: "All notification",
         toLink: "/notice",
         icon: BiBookReader,
       },
       {
-        title: "мэдэгдэл илгээх",
+        title: "notification send",
         toLink: "/notice/add",
         icon: BiBookReader,
       },
     ],
   },
   {
-    title: "Үзэх хичээл",
+    title: "Lesson to watch",
     toLink: "/subject",
     icon: FiSlack,
   },
   {
-    title: "Хуанли",
+    title: "calendar",
     toLink: "/calendar",
     icon: BiCalendar,
   },
 
   {
-    title: "Үйл ажиллагаа",
+    title: "event",
     toLink: "/event",
     icon: BiCalendarEvent,
   },
   {
-    title: "номын сан",
+    title: "library",
     toLink: "/library",
     icon: BiBookBookmark,
     drop: [
       {
-        title: "Бүх номын сан",
+        title: "library",
         toLink: "/library",
         icon: BiBookBookmark,
       },
     ],
   },
   {
-    title: "Чат",
+    title: "chat",
     toLink: "/chat",
     icon: BiChat,
   },

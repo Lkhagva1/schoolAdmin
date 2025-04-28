@@ -31,7 +31,38 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import LineChart from "../../components/charts/LineChart";
 import BarChart from "../../components/charts/BarChart";
 import axios from "axios";
-
+const teacher = [
+  {
+    "name": "Bat",
+    "surname": "Erdene",
+    "email": "bat.erdene@example.com",
+    "employee_id": "EMP001",
+    "qualification": "Bachelor of Education",
+    "date_of_birth": "1990-05-10",
+    "age": 34,
+    "gender": "male",
+    "joining_year": 2015,
+    "address": "Ulaanbaatar, Mongolia",
+    "password": "password123",
+    "mobile": "99119911",
+    "teaching_area": "Mathematics"
+  },
+  {
+    "name": "Sarantuya",
+    "surname": "Bold",
+    "email": "sara.bold@example.com",
+    "employee_id": "EMP002",
+    "qualification": "Master of Arts",
+    "date_of_birth": "1985-11-23",
+    "age": 39,
+    "gender": "female",
+    "joining_year": 2010,
+    "address": "Erdenet, Mongolia",
+    "password": "securepass456",
+    "mobile": "88118811",
+    "teaching_area": "History"
+  }
+]
 const Dashboard = () => {
   const textColor = useColorModeValue("gray.700", "white");
   const tableRowColor = useColorModeValue("#F7FAFC", "navy.900");
@@ -41,15 +72,9 @@ const Dashboard = () => {
   const { colorMode } = useColorMode();
   const [teacherList, setTeacherList] = useState([]);
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/getAllFac", {})
-      .then((res) => {
-        console.log("branch ---", res.data);
-        setTeacherList(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (teacher.length > 0) {
+      setTeacherList(teacher);
+    }
   }, []);
 
   return (
@@ -80,7 +105,7 @@ const Dashboard = () => {
         >
           <Flex direction="column" mb="40px" p="28px 0px 0px 22px">
             <Text color="#222" fontSize="lg" fontWeight="bold" mb="6px">
-              Сурагчдын элсэлт
+              Student enrollment
             </Text>
             <Text color="#fff" fontSize="sm">
               <Text as="span" color="green.400" fontWeight="bold">
@@ -99,10 +124,10 @@ const Dashboard = () => {
         <Card p="0px" maxW={{ sm: "320px", md: "100%" }}>
           <Flex direction="column" mb="0px" p="28px 0px 0px 22px">
             <Text color="gray.400" fontSize="sm" fontWeight="bold" mb="6px">
-              Хуанли
+              Calendar
             </Text>
             <Text color={"gray.500"} fontSize="lg" fontWeight="bold">
-              Өнөөдөр
+              Today
             </Text>
           </Flex>
           <Box minH="300px">
@@ -126,10 +151,10 @@ const Dashboard = () => {
           <Flex direction="column">
             <Flex align="center" justify="space-between" p="22px">
               <Text fontSize="lg" color={textColor} fontWeight="bold">
-                Багш ажилчид
+                Teachers and staff
               </Text>
               <Button colorScheme="green" maxH="30px" fontSize={"12px"}>
-                <Link href={"/teachers"}>Бүгдийг харах</Link>
+                <Link href={"/teachers"}>See all</Link>
               </Button>
             </Flex>
             <Box overflow={{ sm: "scroll", lg: "hidden" }}>
@@ -137,16 +162,16 @@ const Dashboard = () => {
                 <Thead>
                   <Tr bg={tableRowColor}>
                     <Th color="gray.400" borderColor={borderColor}>
-                      Багшийн нэр
+                      Teacher's name
                     </Th>
                     <Th color="gray.400" borderColor={borderColor}>
-                      Хэлтэс
+                      Department
                     </Th>
                     <Th color="gray.400" borderColor={borderColor}>
-                      Хүйс
+                      Gender
                     </Th>
                     <Th color="gray.400" borderColor={borderColor}>
-                      Элссэн онгоо
+                      The day I joined
                     </Th>
                   </Tr>
                 </Thead>
@@ -199,10 +224,10 @@ const Dashboard = () => {
           <Flex direction="column">
             <Flex align="center" justify="space-between" p="22px">
               <Text fontSize="lg" color={textColor} fontWeight="bold">
-                Хичээлийн дундаж ирц
+                Average class attendance
               </Text>
               <Button colorScheme="green" maxH="30px" fontSize={"12px"}>
-                Бүгдийг харах
+                See all
               </Button>
             </Flex>
           </Flex>

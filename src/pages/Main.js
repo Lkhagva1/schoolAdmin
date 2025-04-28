@@ -9,39 +9,9 @@ import {
 import React from "react";
 import Header from "../components/header/Header";
 import SideBar from "../components/sidebar/SideBar";
-// import { UseAuth } from "../hooks/UseAuth";
-// import { useLocation } from "react-router-dom";
 
 const Main = ({ children }) => {
-  // const { isOpen, onOpen, onClose } = useDisclosure();
-  // const context = useContext(UseAuth);
-  // const location = useLocation();
   return (
-    // <Box
-    //   as="section"
-    //   minH="100vh"
-    //   bg={useColorModeValue("gray.50", "gray.900")}
-    // >
-    //   <SideBar
-    //     onClose={() => onClose}
-    //     display={{ base: "none", md: "unset" }}
-    //   />
-    //   <Drawer
-    //     autoFocus={false}
-    //     isOpen={isOpen}
-    //     placement="left"
-    //     onClose={onClose}
-    //     returnFocusOnClose={false}
-    //     onOverlayClick={onClose}
-    //   >
-    //     <DrawerContent>
-    //       <SideBar onClose={onClose} />
-    //     </DrawerContent>
-    //   </Drawer>
-    //   {/* mobilenav */}
-    //   <Header onOpen={onOpen} />
-    //   <Box>{children}</Box>
-    // </Box>
     <Box
       as="section"
       minH="100vh"

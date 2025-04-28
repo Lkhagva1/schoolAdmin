@@ -8,28 +8,28 @@ import {
 export const statsData = [
   {
     id: 1,
-    label: "Нийт сурагч",
+    label: "Total students",
     score: 1730,
     icon: FiActivity,
     percentage: "10%",
   },
   {
     id: 2,
-    label: "нийт багш",
+    label: "all teachers",
     score: 3245,
     icon: FiCodesandbox,
     percentage: "30%",
   },
   {
     id: 3,
-    label: "тэнхим",
+    label: "department",
     score: 100,
     icon: FiCommand,
     percentage: "30%",
   },
   {
     id: 3,
-    label: "элсэлт",
+    label: "admission",
     score: 100,
     icon: FiHardDrive,
     percentage: "30%",

@@ -72,7 +72,8 @@ const Header = ({ onOpen, ...rest }) => {
         >
           <BreadcrumbItem>
             <BreadcrumbLink href="/dashboard" fontSize={12}>
-              Хуудас
+              Pages
+
             </BreadcrumbLink>
           </BreadcrumbItem>
           {navData.filter((e) => e.toLink !== "/profile") ? (
@@ -93,37 +94,37 @@ const Header = ({ onOpen, ...rest }) => {
         </Breadcrumb>
         <Text color={"#45A735"} fontWeight={"medium"} fontSize={12}>
           {location.pathname === "/dashboard"
-            ? "Хяналтын самбар"
+            ? "dashboard"
             : location.pathname === "/profile"
-            ? "Профайл"
+            ? "profile"
             : location.pathname === "/students"
-            ? "Сурагч"
+            ? "students"
             : location.pathname === "/students/add"
-            ? "Сурагч нэмэх"
+            ? "students add"
             : location.pathname === "/teachers"
-            ? "Багш"
+            ? "teachers"
             : location.pathname === "/teachers/add"
-            ? "Багш нэмэх"
+            ? "teachers add"
             : location.pathname === "/club"
-            ? "клуб"
+            ? "club"
             : location.pathname === "/club/add"
-            ? "клуб нэмэх"
+            ? "club add"
             : location.pathname === "/complain"
-            ? "гомдол"
+            ? "complain"
             : location.pathname === "/notice"
-            ? "мэдэгдэл"
+            ? "notice"
             : location.pathname === "/notice/add"
-            ? "мэдэгдэл нэмэх"
+            ? "notice add"
             : location.pathname === "/subject"
-            ? "үзэх хичээл"
+            ? "subject"
             : location.pathname === "/calendar"
-            ? "хуанли"
+            ? "calendar"
             : location.pathname === "/event"
-            ? "үйл ажиллагаа"
+            ? "event"
             : location.pathname === "/library"
-            ? "номын сан"
+            ? "library"
             : location.pathname === "/chat"
-            ? "чат"
+            ? "chat"
             : null}
         </Text>
       </VStack>
@@ -204,7 +205,7 @@ const Header = ({ onOpen, ...rest }) => {
               <MenuItem>Тохиргоо</MenuItem>
               <MenuItem>Данс</MenuItem>
               <MenuDivider />
-              <MenuItem onClick={logoutHandler}>Гарах</MenuItem>
+              <MenuItem onClick={()=>logoutHandler(true)}>Гарах</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

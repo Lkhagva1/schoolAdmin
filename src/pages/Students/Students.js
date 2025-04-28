@@ -38,19 +38,45 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { FiTrash2, FiEdit, FiUserPlus, FiEdit2 } from "react-icons/fi";
 import { FcGraduationCap } from "react-icons/fc";
 import axios from "axios";
-
+const studentData = [{
+  "name": "John",
+    "surname": "Doe",
+    "mother_name": "Jane Doe",
+    "father_name": "Richard Doe",
+    "email": "john.doe@example.com",
+    "Roll_No": "12345",
+    "age": 25,
+    "gender": "Male",
+    "date_of_birth": "1998-03-15",
+    "address": "123 Main St, Springfield",
+    "mobile": "+1234567890",
+    "clsName": "Class A",
+    "addmision_year": 2021,
+    "password": "securePassword123"
+},
+{
+  "name": "John",
+    "surname": "Doe",
+    "mother_name": "Jane Doe",
+    "father_name": "Richard Doe",
+    "email": "john.doe@example.com",
+    "Roll_No": "12345",
+    "age": 25,
+    "gender": "Male",
+    "date_of_birth": "1998-03-15",
+    "address": "123 Main St, Springfield",
+    "mobile": "+1234567890",
+    "clsName": "Class A",
+    "addmision_year": 2021,
+    "password": "securePassword123"
+}
+]
 const Students = () => {
   const [studentList, setStudentList] = useState([]);
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/getAllStuClass", {})
-      .then((res) => {
-        // console.log("branch ---", res.data.data);
-        setStudentList(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+   if (studentData){
+     setStudentList(studentData)
+   }
   }, []);
   return (
     <Box ml="225px" mt={"30px"} bg={"white"} rounded="lg" boxShadow={"lg"}>
@@ -60,7 +86,7 @@ const Students = () => {
             <FcGraduationCap />
           </Text>
           <Text fontSize="15px" fontWeight="bold">
-            Бүх сурагчид
+            All Students
           </Text>
           <HStack>
             <Button colorScheme={"green"} alignItems="center" textAlign={"end"}>
@@ -103,12 +129,12 @@ const Students = () => {
               <option>25</option>
             </Select>
             <Text fontSize="xs" color="#45a735" fontWeight="normal">
-              хуудасны хувиарлалт
+              page layout
             </Text>
           </Stack>
           <Input
             type="text"
-            placeholder="хайх..."
+            placeholder="search..."
             minW="75px"
             maxW="175px"
             fontSize="sm"
@@ -123,20 +149,20 @@ const Students = () => {
               <Thead>
                 <Tr>
                   <Th w="5%">ID</Th>
-                  <Th w="10%">Зураг</Th>
-                  <Th w="10%">Овог</Th>
-                  <Th w="10%">Нэр</Th>
-                  <Th w="10%">Регистер</Th>
-                  <Th w="10%"> хэлбэр</Th>
-                  <Th w="10%">цахим хаяг</Th>
-                  <Th w="10%">курс</Th>
-                  <Th w="10%">нас</Th>
-                  <Th w="10%">хүйс</Th>
-                  <Th w="10%">төрсөн өдөр</Th>
-                  <Th w="10%">Утас</Th>
+                  <Th w="10%">img</Th>
+                  <Th w="10%">Lastname</Th>
+                  <Th w="10%">Firstname</Th>
+                  <Th w="10%">Rd</Th>
+                  <Th w="10%"> MotherName</Th>
+                  <Th w="10%">email</Th>
+                  <Th w="10%">cource</Th>
+                  <Th w="10%">age</Th>
+                  <Th w="10%">gender</Th>
+                  <Th w="10%">birthday</Th>
+                  <Th w="10%">phone</Th>
                   <Th w="10%">Roll no</Th>
-                  <Th w="10%">Хаяг</Th>
-                  <Th w="10%">элссэн он</Th>
+                  <Th w="10%">address</Th>
+                  <Th w="10%">year of admission</Th>
                   <Th w="10%">action</Th>
                 </Tr>
               </Thead>

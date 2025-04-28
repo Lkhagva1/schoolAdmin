@@ -97,7 +97,7 @@ const StudentAdd = () => {
             <FcGraduationCap />
           </Text>
           <Text fontSize="15px" fontWeight="bold">
-            Сурагч нэмэх
+            Student add
           </Text>
           {/* <HStack>
             <Button colorScheme={"green"} alignItems="center" textAlign={"end"}>
@@ -119,40 +119,40 @@ const StudentAdd = () => {
         <VStack spacing={4} w="100%">
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl isRequired>
-              <FormLabel>Овог</FormLabel>
+              <FormLabel>Lastname</FormLabel>
               <Input
                 value={surname}
                 onChange={(e) => setSurName(e.target.value)}
-                placeholder="овог"
+                placeholder="Lastname"
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Нэр</FormLabel>
+              <FormLabel>Firstname</FormLabel>
               <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
-                placeholder="Ahmad"
+                placeholder="Firstname"
                 rounded="md"
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>хэлбэр</FormLabel>
+              <FormLabel>MotherName</FormLabel>
               <Input
                 value={mother_name}
                 onChange={(e) => setMother_name(e.target.value)}
                 type="text"
-                placeholder="хэлбэр"
+                placeholder="MotherName"
                 rounded="md"
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>Регистер</FormLabel>
+              <FormLabel>RD</FormLabel>
               <Input
                 value={father_name}
                 onChange={(e) => setFather_name(e.target.value)}
                 type="text"
-                placeholder="Регистер
+                placeholder="RD
                 "
                 rounded="md"
               />
@@ -160,9 +160,9 @@ const StudentAdd = () => {
           </Stack>
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl isRequired>
-              <FormLabel>Хүйс</FormLabel>
+              <FormLabel>Gender</FormLabel>
               <Select
-                placeholder="Хүйс сонгох"
+                placeholder="Gender select"
                 value={gender}
                 id="selectId"
                 onChange={(e) => setGender(e.target.value)}
@@ -176,9 +176,9 @@ const StudentAdd = () => {
               </Select>
             </FormControl>
             <FormControl isRequired>
-              <FormLabel>курс</FormLabel>
+              <FormLabel>course</FormLabel>
               <Select
-                placeholder="курс сонгох"
+                placeholder="course select"
                 id="selectId"
                 value={clsName}
                 onChange={(e) => setClsName(e.target.value)}
@@ -192,9 +192,9 @@ const StudentAdd = () => {
               </Select>
             </FormControl>
             <FormControl>
-              <FormLabel>Хаяг</FormLabel>
+              <FormLabel>Address</FormLabel>
               <Select
-                placeholder="Хаяг сонгох"
+                placeholder="Address select"
                 id="selectId"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -210,7 +210,7 @@ const StudentAdd = () => {
           </Stack>
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl>
-              <FormLabel>Цахим хаяг</FormLabel>
+              <FormLabel>Email</FormLabel>
               <Input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -219,7 +219,7 @@ const StudentAdd = () => {
               <FormHelperText>We'll never share your email.</FormHelperText>
             </FormControl>
             <FormControl>
-              <FormLabel>төрсөн он сар өдөр</FormLabel>
+              <FormLabel>Birthday</FormLabel>
               <Input
                 value={date_of_birth}
                 onChange={(e) => setDate_of_birth(e.target.value)}
@@ -227,7 +227,7 @@ const StudentAdd = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>элссэн он</FormLabel>
+              <FormLabel>year of admission</FormLabel>
               <Input
                 value={addmision_year}
                 onChange={(e) => setAddmision_year(e.target.value)}
@@ -237,7 +237,7 @@ const StudentAdd = () => {
           </Stack>
           <Stack w="100%" spacing={3} direction={{ base: "column", md: "row" }}>
             <FormControl>
-              <FormLabel>Нас</FormLabel>
+              <FormLabel>Age</FormLabel>
               <NumberInput max={50} min={0}>
                 <NumberInputField
                   value={age}
@@ -250,7 +250,7 @@ const StudentAdd = () => {
               </NumberInput>
             </FormControl>
             <FormControl>
-              <FormLabel>Утас</FormLabel>
+              <FormLabel>Phone</FormLabel>
               <Input
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
@@ -258,7 +258,7 @@ const StudentAdd = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>код</FormLabel>
+              <FormLabel>Kod</FormLabel>
               <Input
                 value={Roll_No}
                 onChange={(e) => setRoll_No(e.target.value)}
@@ -266,7 +266,7 @@ const StudentAdd = () => {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Нууц үг</FormLabel>
+              <FormLabel>Password</FormLabel>
               <Input
                 value={password}
                 onChange={(e) => setPasword(e.target.value)}
@@ -284,9 +284,9 @@ const StudentAdd = () => {
             }}
             rounded="md"
             w={{ base: "100%", md: "max-content" }}
-            onClick={() => createStudent()}
+            // onClick={() => createStudent()}
           >
-            Бүртгэх
+            Register
           </Button>
         </VStack>
       </Stack>

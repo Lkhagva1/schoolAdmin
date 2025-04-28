@@ -80,11 +80,11 @@ const Login = () => {
                   borderColor: "#45A735",
                 }}
                 onKeyPress={(e) => {
-                  if (email && password) {
-                    if (e.key === "Enter") {
-                      context.loginHandler(email, password);
-                    }
-                  }
+                  // if (email && password) {
+                  //   if (e.key === "Enter") {
+                  //     context.loginHandler(email, password);
+                  //   }
+                  // }
                 }}
               />
               <InputRightElement
@@ -129,7 +129,7 @@ const Login = () => {
             }}
             fontWeight={"normal"}
             width={"full"}
-            disabled={email && password && !context.isLoading ? false : true}
+            // disabled={email && password && !context.isLoading ? false : true}
             onClick={() => context.loginHandler(email, password)}
           >
             {context.isLoading ? <Spinner mr={2} size="sm" /> : null}
